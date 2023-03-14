@@ -20,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
     Animation topAnimation, botAnimation;
     ImageView image;
     TextView logo;
+    private String ss;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
