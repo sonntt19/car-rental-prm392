@@ -1,4 +1,4 @@
-package com.example.car_rental_prm392;
+package com.example.car_rental_prm392.controller;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -15,6 +15,9 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.car_rental_prm392.R;
+import com.example.car_rental_prm392.dao.DBManager;
+
 public class MainActivity extends AppCompatActivity {
     private static int SPLASH_SCREEN = 4000;
     Animation topAnimation, botAnimation;
@@ -26,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
+        DBManager dbManager = new DBManager(this);
 
         topAnimation = AnimationUtils.loadAnimation(this, R.anim.top_anim);
         botAnimation = AnimationUtils.loadAnimation(this, R.anim.bottom_anim);
