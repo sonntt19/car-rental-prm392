@@ -17,7 +17,7 @@ import com.example.car_rental_prm392.model.User;
 import com.google.android.material.textfield.TextInputLayout;
 
 public class LoginActivity extends AppCompatActivity {
-    Button btnSignUp, btnLogin;
+    Button btnSignUp, btnLogin, btnForget;
     ImageView imgLogo;
     TextView tvLogoText;
     TextInputLayout editEmail, editPassword;
@@ -53,6 +53,13 @@ public class LoginActivity extends AppCompatActivity {
                     startActivity(intent);
             }
         });
+        btnForget.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, ForgetPasswordActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     public void init() {
@@ -60,6 +67,7 @@ public class LoginActivity extends AppCompatActivity {
         editPassword = findViewById(R.id.login_password);
         btnSignUp = findViewById(R.id.login_signup_screen);
         btnLogin = findViewById(R.id.login);
+        btnForget = findViewById(R.id.forget);
         imgLogo = findViewById(R.id.logo);
         tvLogoText = findViewById(R.id.logo_text);
     }
