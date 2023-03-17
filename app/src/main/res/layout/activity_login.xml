@@ -13,7 +13,7 @@
         android:layout_height="150dp"
         android:src="@drawable/logo_login"
         android:transitionName="logo"
-        android:id="@+id/logo"/>
+        android:id="@+id/logo" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -23,7 +23,7 @@
         android:textColor="#000"
         android:textSize="40sp"
         android:transitionName="logo_text"
-        android:id="@+id/logo_text"/>
+        android:id="@+id/logo_text" />
 
     <TextView
         android:layout_width="wrap_content"
