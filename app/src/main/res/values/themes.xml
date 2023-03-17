@@ -2,8 +2,8 @@
     <!-- Base application theme. -->
     <style name="Theme.Carrentalprm392" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_500</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorPrimary">@color/lavender</item>
+        <item name="colorPrimaryVariant">@color/lavender</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
@@ -13,4 +13,8 @@
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+<style name="DialogAnimation">
+    <item name="android:windowEnterAnimation">@anim/slide_in_anim</item>
+    <item name="android:windowExitAnimation">@anim/slide_out_anim</item>
+</style>
 </resources>

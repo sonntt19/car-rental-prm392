@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn = "navigation_view">
+
+    <group
+        android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/nav_car"
+            android:icon="@drawable/car_btn"
+            android:title="Car Manager"/>
+
+        <item
+            android:id="@+id/nav_category"
+            android:icon="@drawable/category_btn"
+            android:title="Category Manager"/>
+
+        <item
+            android:id="@+id/nav_user"
+            android:icon="@drawable/profile_btn"
+            android:title="User Manager"/>
+    </group>
+    <item
+        android:title="">
+
+        <menu>
+            <item
+                android:id="@+id/nav_logout"
+                android:icon="@drawable/logout_btn"
+                android:title="Logout"/>
+        </menu>
+
+    </item>
+
+</menu>
