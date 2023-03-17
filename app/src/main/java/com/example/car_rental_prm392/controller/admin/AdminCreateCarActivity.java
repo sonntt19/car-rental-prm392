@@ -10,40 +10,64 @@ import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.car_rental_prm392.R;
 import com.example.car_rental_prm392.dao.DBManager;
+import com.example.car_rental_prm392.model.Car;
 import com.example.car_rental_prm392.model.Location;
-import com.example.car_rental_prm392.model.User;
+import com.google.android.material.textfield.TextInputLayout;
 
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.util.ArrayList;
 
-public class AdminCreateLocationActivity extends AppCompatActivity {
-
-    private EditText editName,editDescription;
+public class AdminCreateCarActivity extends AppCompatActivity {
+    private EditText editName,editDescription, editPrice;
     private Button btnSave;
     private ImageView img;
     private ImageButton ibtnCamera, ibtnFolder;
     int REQUEST_CODE_CAMERA = 123;
     int REQUEST_CODE_FOLDER = 456;
+    AutoCompleteTextView completeTextView;
+    ArrayAdapter<String> adapterItems;
+    ArrayList<Location> listLocations;
+    int idLocation = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_admin_create_location);
+        setContentView(R.layout.activity_admin_create_car);
         DBManager dbManager = new DBManager(this);
-        init();
+        listLocations = dbManager.getAllLocation();
+        String[] stringArray = new String[listLocations.size()];
 
+        for (int i = 0; i < listLocations.size(); i++) {
+            stringArray[i] = listLocations.get(i).getName();
+        }
+        init();
+        adapterItems = new ArrayAdapter<String>(this, R.layout.list_item,stringArray);
+        completeTextView.setAdapter(adapterItems);
+
+        completeTextView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                for (Location o:
+                     listLocations) {
+                    if(o.getName().equalsIgnoreCase(stringArray[position]))
+                        idLocation = o.getId();
+                }
+            }
+        });
 
         ibtnCamera.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,12 +89,13 @@ public class AdminCreateLocationActivity extends AppCompatActivity {
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Location location = createLocation();
+                Car car = createCar();
 
-                if (location!= null){
-                    dbManager.addLocation(location);
+                if (car!= null){
+                    dbManager.addCar(car);
                     editName.setText("");
                     editDescription.setText("");
+                    editPrice.setText("");
                     Toast.makeText(getApplicationContext(), "Successfully", Toast.LENGTH_LONG).show();
                 }
             }
@@ -98,15 +123,16 @@ public class AdminCreateLocationActivity extends AppCompatActivity {
     }
 
     public void init(){
-        editName=findViewById(R.id.add_location_name);
-        editDescription=findViewById(R.id.add_location_description);
-        btnSave=findViewById(R.id.add_location_save);
-        ibtnCamera=findViewById(R.id.add_location_camera);
-        ibtnFolder=findViewById(R.id.add_location_folder);
-        img = findViewById((R.id.add_location_img_test));
+        editName=findViewById(R.id.add_car_name);
+        editDescription=findViewById(R.id.add_car_description);
+        editPrice=findViewById(R.id.add_car_price);
+        btnSave=findViewById(R.id.add_car_save);
+        ibtnCamera=findViewById(R.id.add_car_camera);
+        ibtnFolder=findViewById(R.id.add_car_folder);
+        img = findViewById((R.id.add_car_img_test));
+        completeTextView = findViewById(R.id.admin_car_auto_complete);
     }
-    private Location createLocation(){
-        DBManager dbManager = new DBManager(this);
+    private Car createCar(){
         BitmapDrawable bitmapDrawable = (BitmapDrawable) img.getDrawable();
         Bitmap bitmap = bitmapDrawable.getBitmap();
         ByteArrayOutputStream byteArray = new ByteArrayOutputStream();
@@ -115,13 +141,9 @@ public class AdminCreateLocationActivity extends AppCompatActivity {
 
         String name = editName.getText().toString();
         String description = editDescription.getText().toString();
+        double price = Double.parseDouble(editPrice.getText().toString());
 
-        Location locationCheck = dbManager.checkLocationByName(name);
-        if (locationCheck!=null){
-            Toast.makeText(getApplicationContext(), "Location name Existed", Toast.LENGTH_LONG).show();
-            return null;
-        }
-        Location location = new Location(name, description,image);
-        return location;
+        Car car = new Car(name,description,price,image,1,idLocation);
+        return car;
     }
 }

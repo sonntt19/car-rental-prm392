@@ -1,24 +1,24 @@
 package com.example.car_rental_prm392.model;
 
-public class Car {
+import java.io.Serializable;
+
+public class Car implements Serializable {
     private int id;
     private String name;
     private String description;
     private double price;
     private byte[] image;
-    private String dateUpdate;
     private int status;
     private int locationId;
 
     public Car() {
     }
 
-    public Car(String name, String description, double price, byte[] image, String dateUpdate, int status, int locationId) {
+    public Car(String name, String description, double price, byte[] image, int status, int locationId) {
         this.name = name;
         this.description = description;
         this.price = price;
         this.image = image;
-        this.dateUpdate = dateUpdate;
         this.status = status;
         this.locationId = locationId;
     }
@@ -61,14 +61,6 @@ public class Car {
 
     public void setImage(byte[] image) {
         this.image = image;
-    }
-
-    public String getDateUpdate() {
-        return dateUpdate;
-    }
-
-    public void setDateUpdate(String dateUpdate) {
-        this.dateUpdate = dateUpdate;
     }
 
     public int getStatus() {

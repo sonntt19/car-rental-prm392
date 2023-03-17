@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:id="@+id/admin_car_item">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -9,7 +10,7 @@
         android:orientation="horizontal">
 
         <ImageView
-            android:id="@+id/imgCar"
+            android:id="@+id/admin_car_img"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:gravity="center"
@@ -35,7 +36,7 @@
                     android:layout_height="wrap_content"/>
                 <TextView
                     android:layout_weight="5"
-                    android:id="@+id/carName"
+                    android:id="@+id/admin_car_name"
                     android:hint="Volvo"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"/>
@@ -55,7 +56,7 @@
                     android:layout_height="wrap_content"/>
                 <TextView
                     android:layout_weight="5"
-                    android:id="@+id/carLocation"
+                    android:id="@+id/admin_car_location"
                     android:hint="Ha Noi"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"/>
@@ -75,7 +76,7 @@
                     android:layout_height="wrap_content"/>
                 <TextView
                     android:layout_weight="5"
-                    android:id="@+id/carPrice"
+                    android:id="@+id/admin_car_price"
                     android:hint="200$/day"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"/>
