@@ -1,4 +1,4 @@
-package com.example.car_rental_prm392.controller;
+package com.example.car_rental_prm392.controller.admin;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -13,6 +13,9 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.car_rental_prm392.R;
+import com.example.car_rental_prm392.controller.admin.fragment.CarManagerFragment;
+import com.example.car_rental_prm392.controller.admin.fragment.CategoryManagerFragment;
+import com.example.car_rental_prm392.controller.admin.fragment.UserManagerFragment;
 import com.google.android.material.navigation.NavigationView;
 
 public class AdminManagerActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {

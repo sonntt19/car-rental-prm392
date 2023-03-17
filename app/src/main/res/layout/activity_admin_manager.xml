@@ -8,7 +8,7 @@
     android:id="@+id/drawer_admin_manager"
     android:fitsSystemWindows="true"
     tools:openDrawer="start"
-    tools:context=".controller.AdminManagerActivity">
+    tools:context=".controller.admin.AdminManagerActivity">
 
     <LinearLayout
         android:layout_width="match_parent"

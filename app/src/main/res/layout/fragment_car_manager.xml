@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".controller.CarManagerFragment">
+    tools:context=".controller.admin.fragment.CarManagerFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
@@ -14,8 +14,4 @@
         android:textSize="30sp"
         android:layout_centerInParent="true"
         android:textColor="@color/lavender"/>
-<Button
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:id="@+id/nguasd"/>
 </RelativeLayout>

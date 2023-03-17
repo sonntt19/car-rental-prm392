@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="20dp"
-    tools:context=".controller.LoginActivity">
+    tools:context=".controller.common.LoginActivity">
 
     <ImageView
         android:layout_width="150dp"
@@ -68,16 +68,6 @@
                 android:inputType="textPassword" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <Button
-            android:id="@+id/forget"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:layout_margin="5dp"
-            android:backgroundTint="#FFFFFF"
-            android:elevation="0dp"
-            android:text="forget password?"
-            android:textColor="#000" />
 
         <Button
             android:id="@+id/login"
