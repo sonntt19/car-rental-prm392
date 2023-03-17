@@ -13,6 +13,20 @@
         android:theme="@style/Theme.Carrentalprm392"
         tools:targetApi="31">
         <activity
+            android:name=".controller.HistoryActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".controller.UserProfileActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".controller.AdminManagerActivity"
             android:exported="false">
             <meta-data
@@ -35,7 +49,13 @@
         </activity>
         <activity
             android:name=".controller.HomeActivity"
-            android:exported="false">
+            android:exported="true">
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -49,14 +69,8 @@
         </activity>
         <activity
             android:name=".controller.MainActivity"
-            android:exported="true">
+            android:exported="false">
 
-
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
