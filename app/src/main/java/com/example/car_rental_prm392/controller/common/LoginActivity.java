@@ -1,4 +1,4 @@
-package com.example.car_rental_prm392.controller;
+package com.example.car_rental_prm392.controller.common;
 
 import android.content.Intent;
 import android.os.Bundle;

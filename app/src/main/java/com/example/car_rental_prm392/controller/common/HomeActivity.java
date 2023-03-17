@@ -1,4 +1,4 @@
-package com.example.car_rental_prm392.controller;
+package com.example.car_rental_prm392.controller.common;
 
 
 import androidx.appcompat.app.AppCompatActivity;
