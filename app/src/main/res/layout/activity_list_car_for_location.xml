@@ -3,50 +3,50 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".controller.common.ListCarForLocationActivity">
 
     <TextView
-        android:id="@+id/booking_list_label"
+        android:id="@+id/admin_car_label"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:gravity="center"
         android:padding="16dp"
-        android:text="User List"
+        android:text="Car List"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_editor_absoluteX="-16dp" />
 
     <androidx.appcompat.widget.SearchView
-        android:id="@+id/admin_user_search"
+        android:id="@+id/list_car_search"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="2dp"
         app:iconifiedByDefault="false"
-        app:layout_constraintTop_toBottomOf="@+id/booking_list_label"
+        app:layout_constraintTop_toBottomOf="@+id/admin_car_label"
         app:queryHint="Search"
         tools:layout_editor_absoluteX="26dp" />
 
     <TableLayout
-        android:id="@+id/booking_table"
+        android:id="@+id/list_car_table"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:stretchColumns="*"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/admin_user_search">
+        app:layout_constraintTop_toBottomOf="@+id/list_car_search">
 
     </TableLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/admin_user_list"
+        android:id="@+id/list_car_location"
         android:paddingTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/booking_table"/>
-
+        app:layout_constraintTop_toBottomOf="@+id/list_car_table"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.car_rental_prm392.R;
 import com.example.car_rental_prm392.controller.admin.AdminLocationDetailActivity;
+import com.example.car_rental_prm392.controller.common.ListCarForLocationActivity;
 import com.example.car_rental_prm392.model.Location;
 
 import java.util.List;
@@ -51,7 +52,9 @@ public class HomeLocationAdapter extends RecyclerView.Adapter<HomeLocationAdapte
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                byBundle(location);
+                Intent intent = new Intent(context, ListCarForLocationActivity.class);
+                intent.putExtra("locationId",location.getId());
+                context.startActivity(intent);
             }
         });
 
@@ -77,12 +80,4 @@ public class HomeLocationAdapter extends RecyclerView.Adapter<HomeLocationAdapte
         }
     }
 
-    public void byBundle(Location location){
-        Bundle bundle = new Bundle();
-        Intent intent = new Intent(context, AdminLocationDetailActivity.class);
-        bundle.putSerializable("location", location);
-        intent.putExtras(bundle);
-        context.startActivity(intent);
-
-    }
 }
