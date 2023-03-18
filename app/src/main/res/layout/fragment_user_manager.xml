@@ -19,7 +19,7 @@
         tools:layout_editor_absoluteX="-16dp" />
 
     <androidx.appcompat.widget.SearchView
-        android:id="@+id/searchBar"
+        android:id="@+id/admin_user_search"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="2dp"
@@ -35,12 +35,12 @@
         android:stretchColumns="*"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchBar">
+        app:layout_constraintTop_toBottomOf="@+id/admin_user_search">
 
     </TableLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_booking"
+        android:id="@+id/admin_user_list"
         android:paddingTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -48,17 +48,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/booking_table"/>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floatingActionButton2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:clickable="true"
-        app:layout_constraintBottom_toBottomOf="@+id/rv_booking"
-        app:layout_constraintEnd_toEndOf="@+id/rv_booking"
-        app:layout_constraintHorizontal_bias="0.954"
-        app:layout_constraintStart_toStartOf="@+id/rv_booking"
-        app:layout_constraintTop_toBottomOf="@+id/booking_table"
-        app:layout_constraintVertical_bias="0.892"
-        app:srcCompat="@android:drawable/ic_input_add" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

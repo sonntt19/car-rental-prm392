@@ -104,6 +104,45 @@ public class DBManager extends SQLiteOpenHelper {
         db.close();
     }
 
+    public ArrayList<User> getAllUser() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ArrayList<User> listUser = new ArrayList<>();
+        String selectQuery = "SELECT * FROM "+USER_TABLE_NAME;
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        if (cursor.moveToFirst()) {
+            do {
+                User user = new User();
+                user.setUserId(cursor.getInt(0));
+                user.setEmail(cursor.getString(1));
+                user.setPassword(cursor.getString(2));
+                user.setFullName(cursor.getString(3));
+                user.setPhoneNumber(cursor.getString(4));
+                user.setAddress(cursor.getString(5));
+                user.setAvatar(cursor.getBlob(6));
+                user.setRoleId(cursor.getInt(7));
+
+                listUser.add(user);
+            } while (cursor.moveToNext());
+        }
+        db.close();
+        return listUser;
+    }
+
+    public int changeRoleById(int roleId,int id){
+        if(roleId==1){
+            roleId=0;
+        }else {
+            roleId=1;
+        }
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(USER_ROLE_ID,roleId);
+
+        int check = db.update(USER_TABLE_NAME, values, USER_ID+"=?", new String[]{id+""});
+        db.close();
+        return check;
+    }
+
     public User checkUserByEmail(String email) {
         SQLiteDatabase db = this.getWritableDatabase();
         String selectQuery = "SELECT * FROM users WHERE email = ?";

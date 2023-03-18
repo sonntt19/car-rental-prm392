@@ -1,6 +1,8 @@
 package com.example.car_rental_prm392.model;
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable {
     private int userId;
     private String email, password,fullName,phoneNumber, address;
     private byte[] avatar;

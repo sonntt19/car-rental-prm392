@@ -25,15 +25,6 @@
 
     </LinearLayout>
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-
-        <ImageView
-            android:layout_width="380dp"
-            android:layout_height="wrap_content"
-            android:src="@drawable/logo_login" />
-    </LinearLayout>
-    <LinearLayout
         android:layout_width="379dp"
         android:layout_height="64dp"
         android:orientation="horizontal">
@@ -47,7 +38,7 @@
             android:textSize="20sp"
             android:textStyle="bold" />
 
-        <EditText
+        <TextView
             android:id="@+id/et_history_detail_id"
             android:layout_width="251dp"
             android:layout_height="wrap_content"
@@ -68,7 +59,7 @@
             android:textSize="20sp"
             android:textStyle="bold" />
 
-        <EditText
+        <TextView
             android:id="@+id/et_history_detail_customer"
             android:layout_width="251dp"
             android:layout_height="wrap_content"
@@ -89,7 +80,7 @@
             android:textSize="20sp"
             android:textStyle="bold" />
 
-        <EditText
+        <TextView
             android:id="@+id/et_history_detail_car"
             android:layout_width="251dp"
             android:layout_height="wrap_content"
@@ -110,7 +101,7 @@
             android:textSize="20sp"
             android:textStyle="bold" />
 
-        <EditText
+        <TextView
             android:id="@+id/et_history_detail_startDate"
             android:layout_width="251dp"
             android:layout_height="wrap_content"
@@ -131,7 +122,7 @@
             android:textSize="20sp"
             android:textStyle="bold" />
 
-        <EditText
+        <TextView
             android:id="@+id/et_history_detail_endDate"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
@@ -151,7 +142,7 @@
             android:textSize="20sp"
             android:textStyle="bold" />
 
-        <EditText
+        <TextView
             android:id="@+id/et_history_detail_status"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
