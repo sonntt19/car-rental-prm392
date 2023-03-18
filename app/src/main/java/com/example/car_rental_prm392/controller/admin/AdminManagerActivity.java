@@ -10,6 +10,8 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.car_rental_prm392.R;
 import com.example.car_rental_prm392.controller.admin.fragment.CarManagerFragment;
@@ -20,11 +22,12 @@ import com.google.android.material.navigation.NavigationView;
 
 public class AdminManagerActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private DrawerLayout drawerLayout;
+    Button btn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_manager);
-        Toolbar toolbar = findViewById(R.id.toolbar_admin_manager); //Ignore red line errors
+        Toolbar toolbar = findViewById(R.id.toolbar_admin_manager);
         setSupportActionBar(toolbar);
         drawerLayout = findViewById(R.id.drawer_admin_manager);
         NavigationView navigationView = findViewById(R.id.nav_view_admin_manager);

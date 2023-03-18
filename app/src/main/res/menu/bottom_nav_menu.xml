@@ -2,15 +2,15 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/home"
-        android:icon="@drawable/home_btn"
+        android:id="@+id/nav_bot_home"
+        android:icon="@drawable/ic_baseline_navi_home"
         android:title="Home" />
     <item
-        android:id="@+id/history"
-        android:icon="@drawable/history_btn"
+        android:id="@+id/nav_bot_history"
+        android:icon="@drawable/ic_baseline_navi_history"
         android:title="History" />
     <item
-        android:id="@+id/profile"
-        android:icon="@drawable/profile_btn"
+        android:id="@+id/nav_bot_profile"
+        android:icon="@drawable/ic_baseline_navi_person"
         android:title="Profile" />
 </menu>
