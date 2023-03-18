@@ -6,10 +6,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.view.View;
 import android.widget.TextView;
 
 import com.example.car_rental_prm392.R;
@@ -36,7 +40,7 @@ public class HomeActivity extends AppCompatActivity {
     private ArrayList<Car> listcars;
 
     private TextView tvName;
-    CircleImageView cImg;
+    CircleImageView btnLogout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,18 +52,18 @@ public class HomeActivity extends AppCompatActivity {
 
 //        Account Information
         tvName = findViewById(R.id.home_account_name);
-        cImg = findViewById(R.id.home_account_img);
+        btnLogout = findViewById(R.id.home_account_logout);
         User user = DataLocalManager.getUser();
         if (user!=null){
             tvName.setText("Hello "+user.getFullName());
-            if(user.getAvatar()!=null){
-                byte[] image = user.getAvatar();
-                Bitmap bitmap = BitmapFactory.decodeByteArray(image, 0, image.length);
-                cImg.setImageBitmap(bitmap);
-            }
         }
 
-
+        btnLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                logout();
+            }
+        });
 
 //        List Location
         listViewLocation  = findViewById(R.id.home_rv_location);
@@ -97,6 +101,31 @@ public class HomeActivity extends AppCompatActivity {
             }
             return false;
         });
+    }
+
+    private void logout() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Logout");
+        builder.setMessage("Do you want to logout?");
+
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                DataLocalManager.removeUser();
+                Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
+                startActivity(intent);
+            }
+        });
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
     }
 
 }

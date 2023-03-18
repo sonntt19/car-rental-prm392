@@ -90,8 +90,10 @@ public class AdminCarDetailActivity extends AppCompatActivity {
         editName.setText(car.getName());
         editDescription.setText(car.getDescription());
         editPrice.setText(car.getPrice()+"");
-        Bitmap bitmap = BitmapFactory.decodeByteArray(car.getImage(), 0, car.getImage().length);
-        img.setImageBitmap(bitmap);
+        if(car.getImage()!=null){
+            Bitmap bitmap = BitmapFactory.decodeByteArray(car.getImage(), 0, car.getImage().length);
+            img.setImageBitmap(bitmap);
+        }
 
 
         btnDelete.setOnClickListener(new View.OnClickListener() {
@@ -196,11 +198,17 @@ public class AdminCarDetailActivity extends AppCompatActivity {
     }
 
     private Car createCar(){
+        byte[] image = null;
         BitmapDrawable bitmapDrawable = (BitmapDrawable) img.getDrawable();
-        Bitmap bitmap = bitmapDrawable.getBitmap();
-        ByteArrayOutputStream byteArray = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG,100,byteArray);
-        byte[] image = byteArray.toByteArray();
+        if (bitmapDrawable != null) {
+            Bitmap bitmap = bitmapDrawable.getBitmap();
+            ByteArrayOutputStream byteArray = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.PNG,100,byteArray);
+            image = byteArray.toByteArray();
+            // sử dụng bitmap
+        } else {
+            image = null;
+        }
 
         String name = editName.getText().toString();
         String description = editDescription.getText().toString();

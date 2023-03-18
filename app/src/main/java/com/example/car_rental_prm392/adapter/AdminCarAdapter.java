@@ -64,9 +64,12 @@ public class AdminCarAdapter extends RecyclerView.Adapter<AdminCarAdapter.CarVie
 
         holder.tvLocation.setText(location);
         holder.tvPrice.setText(car.getPrice()+"$/day");
-        byte[] image = car.getImage();
-        Bitmap bitmap = BitmapFactory.decodeByteArray(image, 0, image.length);
-        holder.img.setImageBitmap(bitmap);
+        if(car.getImage()!=null ){
+            byte[] image = car.getImage();
+            Bitmap bitmap = BitmapFactory.decodeByteArray(image, 0, image.length);
+            holder.img.setImageBitmap(bitmap);
+        }
+
 
         holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -54,8 +54,11 @@ public class AdminLocationDetailActivity extends AppCompatActivity {
         tvId.setText(location.getId()+"");
         editName.setText(location.getName());
         editDescription.setText(location.getDescription());
-        Bitmap bitmap = BitmapFactory.decodeByteArray(location.getImage(), 0, location.getImage().length);
-        img.setImageBitmap(bitmap);
+        if(location.getImage()!=null){
+            Bitmap bitmap = BitmapFactory.decodeByteArray(location.getImage(), 0, location.getImage().length);
+            img.setImageBitmap(bitmap);
+        }
+
 
 
         btnDelete.setOnClickListener(new View.OnClickListener() {
@@ -156,11 +159,17 @@ public class AdminLocationDetailActivity extends AppCompatActivity {
     }
 
     private Location createLocation(){
+        byte[] image = null;
         BitmapDrawable bitmapDrawable = (BitmapDrawable) img.getDrawable();
-        Bitmap bitmap = bitmapDrawable.getBitmap();
-        ByteArrayOutputStream byteArray = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG,100,byteArray);
-        byte[] image = byteArray.toByteArray();
+        if (bitmapDrawable != null) {
+            Bitmap bitmap = bitmapDrawable.getBitmap();
+            ByteArrayOutputStream byteArray = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.PNG,100,byteArray);
+            image = byteArray.toByteArray();
+            // sử dụng bitmap
+        } else {
+            image = null;
+        }
 
         String name = editName.getText().toString();
         String description = editDescription.getText().toString();

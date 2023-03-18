@@ -133,11 +133,17 @@ public class AdminCreateCarActivity extends AppCompatActivity {
         completeTextView = findViewById(R.id.admin_car_auto_complete);
     }
     private Car createCar(){
+        byte[] image = null;
         BitmapDrawable bitmapDrawable = (BitmapDrawable) img.getDrawable();
-        Bitmap bitmap = bitmapDrawable.getBitmap();
-        ByteArrayOutputStream byteArray = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG,100,byteArray);
-        byte[] image = byteArray.toByteArray();
+        if (bitmapDrawable != null) {
+            Bitmap bitmap = bitmapDrawable.getBitmap();
+            ByteArrayOutputStream byteArray = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.PNG,100,byteArray);
+            image = byteArray.toByteArray();
+            // sử dụng bitmap
+        } else {
+            image = null;
+        }
 
         String name = editName.getText().toString();
         String description = editDescription.getText().toString();

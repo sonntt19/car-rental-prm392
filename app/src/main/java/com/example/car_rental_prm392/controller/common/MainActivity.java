@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         DBManager dbManager = new DBManager(this);
 
+
         topAnimation = AnimationUtils.loadAnimation(this, R.anim.top_anim);
         botAnimation = AnimationUtils.loadAnimation(this, R.anim.bottom_anim);
 

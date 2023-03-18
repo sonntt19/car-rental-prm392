@@ -11,7 +11,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Button;
-import android.widget.Toast;
 
 import com.example.car_rental_prm392.R;
 import com.example.car_rental_prm392.controller.admin.fragment.CarManagerFragment;
@@ -26,6 +25,7 @@ public class AdminManagerActivity extends AppCompatActivity implements Navigatio
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_admin_manager);
         Toolbar toolbar = findViewById(R.id.toolbar_admin_manager);
         setSupportActionBar(toolbar);
@@ -73,4 +73,5 @@ public class AdminManagerActivity extends AppCompatActivity implements Navigatio
             super.onBackPressed();
         }
     }
+
 }
