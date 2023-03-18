@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="deploymentTargetDropDown">
+<<<<<<< HEAD
     <targetSelectedWithDropDown>
       <Target>
         <type value="QUICK_BOOT_TARGET" />
+=======
+    <runningDeviceTargetSelectedWithDropDown>
+      <Target>
+        <type value="RUNNING_DEVICE_TARGET" />
+>>>>>>> 4c9d9971f8b1eaaf392805eb6f13bd31f6edfdf4
         <deviceKey>
           <Key>
             <type value="VIRTUAL_DEVICE_PATH" />
@@ -11,7 +17,12 @@
           </Key>
         </deviceKey>
       </Target>
+<<<<<<< HEAD
     </targetSelectedWithDropDown>
     <timeTargetWasSelectedWithDropDown value="2023-03-17T14:20:23.708148900Z" />
+=======
+    </runningDeviceTargetSelectedWithDropDown>
+    <timeTargetWasSelectedWithDropDown value="2023-03-17T18:22:03.383516400Z" />
+>>>>>>> 4c9d9971f8b1eaaf392805eb6f13bd31f6edfdf4
   </component>
 </project>

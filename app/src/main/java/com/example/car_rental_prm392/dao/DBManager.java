@@ -9,13 +9,14 @@ import android.database.sqlite.SQLiteOpenHelper;
 import androidx.annotation.Nullable;
 
 
+import com.example.car_rental_prm392.model.Car;
 import com.example.car_rental_prm392.model.Location;
 import com.example.car_rental_prm392.model.User;
 
 import java.util.ArrayList;
 
 public class DBManager extends SQLiteOpenHelper {
-    private static final String DATABASE_NAME = "car_rental_manager_v5";
+    private static final String DATABASE_NAME = "car_rental_manager_v6";
     private static final String USER_TABLE_NAME = "users";
     private static final String USER_ID = "id";
     private static final String USER_EMAIL = "email";
@@ -32,7 +33,16 @@ public class DBManager extends SQLiteOpenHelper {
     private static final String LOCATION_DESCRIPTION = "description";
     private static final String LOCATION_AVATAR = "image";
 
-    private static int VERSION = 2;
+    private static final String CAR_TABLE_NAME = "cars";
+    private static final String CAR_ID = "locationId";
+    private static final String CAR_NAME = "name";
+    private static final String CAR_DESCRIPTION = "description";
+    private static final String CAR_PRICE = "price";
+    private static final String CAR_IMAGE = "image";
+    private static final String CAR_STATUS = "status";
+    private static final String CAR_LOCATION_ID = "locationIdCar";
+
+    private static int VERSION = 3;
 
     private Context context;
     //    Create table
@@ -53,15 +63,14 @@ public class DBManager extends SQLiteOpenHelper {
             LOCATION_DESCRIPTION+" TEXT," +
             LOCATION_AVATAR+" BLOB) " ;
 
-//            "CREATE TABLE cars (" +
-//            "carId INTEGER primary key, " +
-//            "name TEXT, " +
-//            "description TEXT, " +
-//            "price REAL, " +
-//            "image BLOB, " +
-//            "dateUpdate TEXT," +
-//            "status INTEGER," +
-//            "locationId INTEGER)";
+    private String SQLCreateCar = "CREATE TABLE "+CAR_TABLE_NAME+" (" +
+            CAR_ID+" INTEGER primary key, " +
+            CAR_NAME+" TEXT, " +
+            CAR_DESCRIPTION+" TEXT, " +
+            CAR_PRICE+" REAL, " +
+            CAR_IMAGE+" BLOB, " +
+            CAR_STATUS+" INTEGER," +
+            CAR_LOCATION_ID+" INTEGER)";
 
 
     public DBManager(@Nullable Context context) {
@@ -72,6 +81,7 @@ public class DBManager extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(SQLCreateLocation);
+        db.execSQL(SQLCreateCar);
         db.execSQL(SQLCreateUser);
     }
 
@@ -203,6 +213,80 @@ public class DBManager extends SQLiteOpenHelper {
         values.put(LOCATION_AVATAR,location.getImage());
 
         int check = db.update(LOCATION_TABLE_NAME, values, LOCATION_ID+"=?", new String[]{id+""});
+        db.close();
+        return check;
+    }
+
+    public Location checkLocationByName(String name) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String selectQuery = "SELECT * FROM locations WHERE name = ?";
+        Cursor cursor = db.rawQuery(selectQuery, new String[]{name});
+        if (cursor.moveToFirst()) {
+            do {
+                Location location = new Location();
+                location.setId(cursor.getInt(0));
+                location.setName(cursor.getString(1));
+                location.setDescription(cursor.getString(2));
+                location.setImage(cursor.getBlob(3));
+                return location;
+            } while (cursor.moveToNext());
+        }
+        db.close();
+        return null;
+    }
+
+
+//        Location Car
+    public void addCar(Car car) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(CAR_NAME, car.getName());
+        values.put(CAR_DESCRIPTION, car.getDescription());
+        values.put(CAR_PRICE, car.getPrice());
+        values.put(CAR_IMAGE, car.getImage());
+        values.put(CAR_STATUS, car.getStatus());
+        values.put(CAR_LOCATION_ID, car.getLocationId());
+        db.insert(CAR_TABLE_NAME, null, values);
+        db.close();
+    }
+
+    public ArrayList<Car> getAllCar() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ArrayList<Car> listCar = new ArrayList<>();
+        String selectQuery = "SELECT * FROM "+CAR_TABLE_NAME;
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        if (cursor.moveToFirst()) {
+            do {
+                Car car = new Car();
+                car.setId(cursor.getInt(0));
+                car.setName(cursor.getString(1));
+                car.setDescription(cursor.getString(2));
+                car.setPrice(cursor.getDouble(3));
+                car.setImage(cursor.getBlob(4));
+                car.setStatus(cursor.getInt(5));
+                car.setLocationId(cursor.getInt(6));
+                listCar.add(car);
+            } while (cursor.moveToNext());
+        }
+        db.close();
+        return listCar;
+    }
+    public int deleteCarById(int id){
+        SQLiteDatabase db = this.getWritableDatabase();
+        int check = db.delete(CAR_TABLE_NAME, CAR_ID+"=?", new String[]{id+""});
+        return check;
+    }
+
+    public int updateCar(Car car, int id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(CAR_NAME,car.getName());
+        values.put(CAR_DESCRIPTION,car.getDescription());
+        values.put(CAR_PRICE,car.getPrice());
+        values.put(CAR_IMAGE,car.getImage());
+        values.put(CAR_LOCATION_ID,car.getLocationId());
+
+        int check = db.update(CAR_TABLE_NAME, values, CAR_ID+"=?", new String[]{id+""});
         db.close();
         return check;
     }

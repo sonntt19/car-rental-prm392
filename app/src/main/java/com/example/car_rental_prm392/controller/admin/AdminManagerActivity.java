@@ -15,7 +15,7 @@ import android.widget.Toast;
 
 import com.example.car_rental_prm392.R;
 import com.example.car_rental_prm392.controller.admin.fragment.CarManagerFragment;
-import com.example.car_rental_prm392.controller.admin.fragment.CategoryManagerFragment;
+import com.example.car_rental_prm392.controller.admin.fragment.LocationManagerFragment;
 import com.example.car_rental_prm392.controller.admin.fragment.UserManagerFragment;
 import com.example.car_rental_prm392.controller.common.LoginActivity;
 import com.google.android.material.navigation.NavigationView;
@@ -50,8 +50,8 @@ public class AdminManagerActivity extends AppCompatActivity implements Navigatio
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new CarManagerFragment()).commit();
                 break;
             case R.id.nav_category:
-                setTitle("Category Manager");
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new CategoryManagerFragment()).commit();
+                setTitle("Location Manager");
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new LocationManagerFragment()).commit();
                 break;
             case R.id.nav_user:
                 setTitle("User Manager");
