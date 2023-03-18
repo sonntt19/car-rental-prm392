@@ -6,10 +6,16 @@
       <Target>
         <type value="QUICK_BOOT_TARGET" />
 =======
+<<<<<<< HEAD
+    <targetSelectedWithDropDown>
+      <Target>
+        <type value="QUICK_BOOT_TARGET" />
+=======
     <runningDeviceTargetSelectedWithDropDown>
       <Target>
         <type value="RUNNING_DEVICE_TARGET" />
 >>>>>>> 4c9d9971f8b1eaaf392805eb6f13bd31f6edfdf4
+>>>>>>> 872576a3ae1d8bdd4bc37758b7a34d0bacb43d77
         <deviceKey>
           <Key>
             <type value="VIRTUAL_DEVICE_PATH" />
@@ -19,10 +25,15 @@
       </Target>
 <<<<<<< HEAD
     </targetSelectedWithDropDown>
+    <timeTargetWasSelectedWithDropDown value="2023-03-17T20:03:20.459228600Z" />
+=======
+<<<<<<< HEAD
+    </targetSelectedWithDropDown>
     <timeTargetWasSelectedWithDropDown value="2023-03-17T14:20:23.708148900Z" />
 =======
     </runningDeviceTargetSelectedWithDropDown>
     <timeTargetWasSelectedWithDropDown value="2023-03-17T18:22:03.383516400Z" />
 >>>>>>> 4c9d9971f8b1eaaf392805eb6f13bd31f6edfdf4
+>>>>>>> 872576a3ae1d8bdd4bc37758b7a34d0bacb43d77
   </component>
 </project>

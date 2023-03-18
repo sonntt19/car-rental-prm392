@@ -15,7 +15,7 @@ import android.view.ViewGroup;
 
 
 import com.example.car_rental_prm392.R;
-import com.example.car_rental_prm392.adapter.LocationAdapter;
+import com.example.car_rental_prm392.adapter.AdminLocationAdapter;
 import com.example.car_rental_prm392.controller.admin.AdminCreateLocationActivity;
 import com.example.car_rental_prm392.dao.DBManager;
 import com.example.car_rental_prm392.model.Location;
@@ -26,7 +26,7 @@ import java.util.ArrayList;
 public class LocationManagerFragment extends Fragment {
 
     RecyclerView listViewLocation;
-    private LocationAdapter locationAdapter;
+    private AdminLocationAdapter adminLocationAdapter;
     private ArrayList<Location> listLocations;
     private FloatingActionButton btnCreate;
 
@@ -42,11 +42,11 @@ public class LocationManagerFragment extends Fragment {
         listViewLocation  = view.findViewById(R.id.admin_rv_location);
         listLocations = dbManager.getAllLocation();
 
-        locationAdapter = new LocationAdapter(getActivity(), listLocations);
+        adminLocationAdapter = new AdminLocationAdapter(getActivity(), listLocations);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         listViewLocation.setLayoutManager(linearLayoutManager);
-        listViewLocation.setAdapter(locationAdapter);
+        listViewLocation.setAdapter(adminLocationAdapter);
 
         btnCreate = view.findViewById(R.id.btn_add_location);
 

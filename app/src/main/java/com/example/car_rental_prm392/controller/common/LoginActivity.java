@@ -12,6 +12,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.car_rental_prm392.R;
+import com.example.car_rental_prm392.controller.data_local.DataLocalManager;
 import com.example.car_rental_prm392.dao.DBManager;
 import com.example.car_rental_prm392.model.User;
 import com.google.android.material.textfield.TextInputLayout;
@@ -37,6 +38,7 @@ public class LoginActivity extends AppCompatActivity {
                 String password = editPassword.getEditText().getText().toString();
                 User user = dbManager.checkUser(email,password);
                 if (user!=null){
+                    DataLocalManager.setUser(user);
                     Toast.makeText(getApplicationContext(), "Login Successfully", Toast.LENGTH_LONG).show();
                     Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                     startActivity(intent);

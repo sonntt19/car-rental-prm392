@@ -13,12 +13,10 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.car_rental_prm392.R;
 import com.example.car_rental_prm392.controller.admin.AdminCarDetailActivity;
-import com.example.car_rental_prm392.controller.admin.AdminLocationDetailActivity;
 import com.example.car_rental_prm392.dao.DBManager;
 import com.example.car_rental_prm392.model.Car;
 import com.example.car_rental_prm392.model.Location;
@@ -26,11 +24,11 @@ import com.example.car_rental_prm392.model.Location;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CarAdapter extends RecyclerView.Adapter<CarAdapter.CarViewHolder> {
+public class AdminCarAdapter extends RecyclerView.Adapter<AdminCarAdapter.CarViewHolder> {
     private Context context;
     private List<Car> listCars;
 
-    public CarAdapter(Context context, List<Car> listCars) {
+    public AdminCarAdapter(Context context, List<Car> listCars) {
         this.context = context;
         this.listCars = listCars;
     }
