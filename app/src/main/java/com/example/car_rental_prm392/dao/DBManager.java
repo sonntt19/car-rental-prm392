@@ -309,6 +309,28 @@ public class DBManager extends SQLiteOpenHelper {
         db.close();
         return listCar;
     }
+
+    public ArrayList<Car> getAllCarAvailableForLocation(int idLocation){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ArrayList<Car> listCar = new ArrayList<>();
+        String selectQuery = "SELECT * FROM "+CAR_TABLE_NAME +" WHERE "+CAR_STATUS+"=1 AND "+CAR_LOCATION_ID+"="+idLocation;
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        if (cursor.moveToFirst()) {
+            do {
+                Car car = new Car();
+                car.setId(cursor.getInt(0));
+                car.setName(cursor.getString(1));
+                car.setDescription(cursor.getString(2));
+                car.setPrice(cursor.getDouble(3));
+                car.setImage(cursor.getBlob(4));
+                car.setStatus(cursor.getInt(5));
+                car.setLocationId(cursor.getInt(6));
+                listCar.add(car);
+            } while (cursor.moveToNext());
+        }
+        db.close();
+        return listCar;
+    }
     public int deleteCarById(int id){
         SQLiteDatabase db = this.getWritableDatabase();
         int check = db.delete(CAR_TABLE_NAME, CAR_ID+"=?", new String[]{id+""});
