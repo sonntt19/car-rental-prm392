@@ -17,8 +17,10 @@ import android.widget.TextView;
 
 import com.example.car_rental_prm392.R;
 import com.example.car_rental_prm392.dao.DBManager;
+import com.example.car_rental_prm392.model.User;
 
 public class MainActivity extends AppCompatActivity {
+    private static final User ADMIN = new User("admin@gmail.com","123456789","Admin","123456789",1);
     private static int SPLASH_SCREEN = 4000;
     Animation topAnimation, botAnimation;
     ImageView image;
@@ -30,7 +32,9 @@ public class MainActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
         DBManager dbManager = new DBManager(this);
-
+        if(dbManager.checkUser("admin@gmail.com","123456789")==null){
+            dbManager.addUser(ADMIN);
+        }
 
         topAnimation = AnimationUtils.loadAnimation(this, R.anim.top_anim);
         botAnimation = AnimationUtils.loadAnimation(this, R.anim.bottom_anim);

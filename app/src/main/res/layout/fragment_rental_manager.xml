@@ -3,9 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".controller.common.HistoryActivity">
-
+    android:layout_height="match_parent">
     <TextView
         android:id="@+id/title"
         android:layout_width="match_parent"
@@ -29,19 +27,6 @@
         android:layout_marginTop="34dp"
         />
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottom_nav"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="640dp"
-        android:layout_marginEnd="40dp"
-        android:layout_marginBottom="30dp"
-        android:background="@drawable/nav_bottom_background"
-        app:itemIconSize="30dp"
-        app:menu="@menu/bottom_nav_menu"
-        app:itemIconTint="@drawable/item_selector"
-        app:itemRippleColor="@android:color/transparent"
-        app:labelVisibilityMode="unlabeled"/>
+
 
 </RelativeLayout>

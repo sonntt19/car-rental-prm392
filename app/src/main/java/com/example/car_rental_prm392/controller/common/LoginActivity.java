@@ -51,10 +51,9 @@ public class LoginActivity extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), "Login Successfully", Toast.LENGTH_LONG).show();
                         Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                         startActivity(intent);
-                    } else {
-                        Toast.makeText(getApplicationContext(), "Email or Password incorrect", Toast.LENGTH_LONG).show();
                     }
                     if (selectedValue.equalsIgnoreCase("admin") && user.getRoleId() == 1) {
+                        DataLocalManager.setUser(user);
                         Toast.makeText(getApplicationContext(), "Login Successfully", Toast.LENGTH_LONG).show();
                         Intent intent = new Intent(LoginActivity.this, AdminManagerActivity.class);
                         startActivity(intent);

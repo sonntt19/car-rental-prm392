@@ -5,6 +5,7 @@
     android:layout_marginTop="20dp"
     android:layout_marginStart="30dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/history_cv_rental"
     app:cardCornerRadius="8dp">
 
     <LinearLayout
@@ -104,7 +105,7 @@
                     android:text="Status:" />
 
                 <TextView
-                    android:id="@+id/item_history_rental_total"
+                    android:id="@+id/item_history_rental_status"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="5"

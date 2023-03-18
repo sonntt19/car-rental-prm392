@@ -21,6 +21,10 @@
             android:id="@+id/nav_user"
             android:icon="@drawable/profile_btn"
             android:title="User Manager"/>
+        <item
+            android:id="@+id/nav_rental"
+            android:icon="@drawable/car_btn"
+            android:title="Rental Manager"/>
     </group>
     <item
         android:title="">

@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.car_rental_prm392.R;
 import com.example.car_rental_prm392.controller.admin.AdminCarDetailActivity;
+import com.example.car_rental_prm392.controller.common.CarDetailActivity;
 import com.example.car_rental_prm392.dao.DBManager;
 import com.example.car_rental_prm392.model.Car;
 import com.example.car_rental_prm392.model.Location;
@@ -102,7 +103,7 @@ public class HomeCarAdapter extends RecyclerView.Adapter<HomeCarAdapter.CarViewH
 
     public void byBundle(Car car) {
         Bundle bundle = new Bundle();
-        Intent intent = new Intent(context, AdminCarDetailActivity.class);
+        Intent intent = new Intent(context, CarDetailActivity.class);
         bundle.putSerializable("car", car);
         intent.putExtras(bundle);
         context.startActivity(intent);
