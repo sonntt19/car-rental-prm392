@@ -58,7 +58,7 @@
         android:id="@+id/add_location_img_test"
         android:scaleType="fitXY"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="200dp"
         android:gravity="center"
         android:padding="4dp"
         />
