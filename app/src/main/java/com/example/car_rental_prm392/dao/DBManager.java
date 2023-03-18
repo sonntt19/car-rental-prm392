@@ -126,6 +126,8 @@ public class DBManager extends SQLiteOpenHelper {
         return null;
     }
 
+
+
     public User checkUserByPhoneNumber(String phoneNumber) {
         SQLiteDatabase db = this.getWritableDatabase();
         String selectQuery = "SELECT * FROM users WHERE phoneNumber = ?";
@@ -169,6 +171,20 @@ public class DBManager extends SQLiteOpenHelper {
         db.close();
         return null;
     }
+
+    public int updateUser(User user, int id){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(USER_FULL_NAME,user.getFullName());
+        values.put(USER_PHONE_NUMBER,user.getPhoneNumber());
+        values.put(USER_ADDRESS,user.getAddress());
+        values.put(USER_AVATAR, user.getAvatar());
+
+        int check = db.update(USER_TABLE_NAME, values, USER_ID+"=?", new String[]{id+""});
+        db.close();
+        return check;
+    }
+
 
     //    Location DAO
     public void addLocation(Location location) {
@@ -236,7 +252,7 @@ public class DBManager extends SQLiteOpenHelper {
     }
 
 
-//        Location Car
+//        Car DAO
     public void addCar(Car car) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -254,6 +270,28 @@ public class DBManager extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         ArrayList<Car> listCar = new ArrayList<>();
         String selectQuery = "SELECT * FROM "+CAR_TABLE_NAME;
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        if (cursor.moveToFirst()) {
+            do {
+                Car car = new Car();
+                car.setId(cursor.getInt(0));
+                car.setName(cursor.getString(1));
+                car.setDescription(cursor.getString(2));
+                car.setPrice(cursor.getDouble(3));
+                car.setImage(cursor.getBlob(4));
+                car.setStatus(cursor.getInt(5));
+                car.setLocationId(cursor.getInt(6));
+                listCar.add(car);
+            } while (cursor.moveToNext());
+        }
+        db.close();
+        return listCar;
+    }
+
+    public ArrayList<Car> getAllCarAvailable(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ArrayList<Car> listCar = new ArrayList<>();
+        String selectQuery = "SELECT * FROM "+CAR_TABLE_NAME +" WHERE "+CAR_STATUS+"=1";
         Cursor cursor = db.rawQuery(selectQuery, null);
         if (cursor.moveToFirst()) {
             do {

@@ -9,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -22,11 +21,11 @@ import com.example.car_rental_prm392.model.Location;
 
 import java.util.List;
 
-public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.LocationViewHolder>{
+public class HomeLocationAdapter extends RecyclerView.Adapter<HomeLocationAdapter.LocationViewHolder>{
     private Context context;
     private List<Location> listLocations;
 
-    public LocationAdapter(Context context, List<Location> listLocations) {
+    public HomeLocationAdapter(Context context, List<Location> listLocations) {
         this.context = context;
         this.listLocations = listLocations;
     }
@@ -34,7 +33,7 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.Locati
     @NonNull
     @Override
     public LocationViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.admin_item_category, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.home_item_location, parent, false);
         return new LocationViewHolder(view);
     }
 
@@ -44,14 +43,12 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.Locati
         if (location==null){
             return;
         }
-        holder.tvId.setText(location.getId() + "");
         holder.tvName.setText(location.getName());
-        holder.tvDescription.setText(location.getDescription());
         byte[] image = location.getImage();
         Bitmap bitmap = BitmapFactory.decodeByteArray(image, 0, image.length);
         holder.img.setImageBitmap(bitmap);
 
-        holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 byBundle(location);
@@ -69,16 +66,14 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.Locati
 
     public class LocationViewHolder extends RecyclerView.ViewHolder{
         private ImageView img;
-        private TextView tvId, tvName, tvDescription;
-        private RelativeLayout relativeLayout;
+        private TextView tvName;
+        private CardView cardView;
 
         public LocationViewHolder(@NonNull View itemView) {
             super(itemView);
-            img = itemView.findViewById(R.id.admin_location_img);
-            tvId = itemView.findViewById(R.id.admin_location_id);
-            tvName = itemView.findViewById(R.id.admin_location_name);
-            tvDescription = itemView.findViewById(R.id.admin_location_description);
-            relativeLayout = itemView.findViewById(R.id.admin_location_item);
+            img = itemView.findViewById(R.id.home_location_img);
+            tvName = itemView.findViewById(R.id.home_location_name);
+            cardView = itemView.findViewById(R.id.home_location_item);
         }
     }
 

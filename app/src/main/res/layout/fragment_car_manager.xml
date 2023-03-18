@@ -55,10 +55,10 @@
         android:clickable="true"
         app:layout_constraintBottom_toBottomOf="@+id/admin_car_list"
         app:layout_constraintEnd_toEndOf="@+id/admin_car_list"
-        app:layout_constraintHorizontal_bias="0.954"
+        app:layout_constraintHorizontal_bias="0.997"
         app:layout_constraintStart_toStartOf="@+id/admin_car_list"
         app:layout_constraintTop_toBottomOf="@+id/admin_car_table"
-        app:layout_constraintVertical_bias="0.892"
+        app:layout_constraintVertical_bias="0.702"
         app:srcCompat="@android:drawable/ic_input_add" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

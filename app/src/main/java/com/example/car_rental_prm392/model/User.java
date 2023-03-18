@@ -9,15 +9,11 @@ public class User {
     public User() {
     }
 
-    public User(String email, String password, String fullName, String phoneNumber, String address, byte[] avatar, int roleId) {
-        this.userId = userId;
-        this.email = email;
-        this.password = password;
+    public User(String fullName, String phoneNumber, String address, byte[] avatar) {
         this.fullName = fullName;
         this.phoneNumber = phoneNumber;
         this.address = address;
         this.avatar = avatar;
-        this.roleId = roleId;
     }
     public User(String email, String password, String fullName, String phoneNumber, int roleId) {
         this.email = email;
