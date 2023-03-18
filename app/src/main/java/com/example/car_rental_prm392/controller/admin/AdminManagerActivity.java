@@ -7,6 +7,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Button;
@@ -16,6 +17,7 @@ import com.example.car_rental_prm392.R;
 import com.example.car_rental_prm392.controller.admin.fragment.CarManagerFragment;
 import com.example.car_rental_prm392.controller.admin.fragment.CategoryManagerFragment;
 import com.example.car_rental_prm392.controller.admin.fragment.UserManagerFragment;
+import com.example.car_rental_prm392.controller.common.LoginActivity;
 import com.google.android.material.navigation.NavigationView;
 
 public class AdminManagerActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -56,7 +58,8 @@ public class AdminManagerActivity extends AppCompatActivity implements Navigatio
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new UserManagerFragment()).commit();
                 break;
             case R.id.nav_logout:
-                Toast.makeText(this, "Logout!", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(AdminManagerActivity.this, LoginActivity.class);
+                startActivity(intent);
                 break;
         }
         drawerLayout.closeDrawer(GravityCompat.START);

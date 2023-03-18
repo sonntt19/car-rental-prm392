@@ -12,7 +12,7 @@
         android:layout_marginTop="4dp"
         android:gravity="center"
         android:padding="16dp"
-        android:text="Booking List"
+        android:text="Car List"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintTop_toTopOf="parent"
