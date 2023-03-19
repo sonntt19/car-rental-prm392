@@ -471,7 +471,7 @@ public class DBManager extends SQLiteOpenHelper {
     public ArrayList<Rental> getAllRental() {
         SQLiteDatabase db = this.getWritableDatabase();
         ArrayList<Rental> listRental = new ArrayList<>();
-        String selectQuery = "SELECT * FROM " + RENTAL_TABLE_NAME ;
+        String selectQuery = "SELECT * FROM " + RENTAL_TABLE_NAME +" ORDER BY "+RENTAL_STATUS;
         Cursor cursor = db.rawQuery(selectQuery, null);
         if (cursor.moveToFirst()) {
             do {
@@ -492,7 +492,7 @@ public class DBManager extends SQLiteOpenHelper {
     public ArrayList<Rental> getAllRentalByUserId(int userId) {
         SQLiteDatabase db = this.getWritableDatabase();
         ArrayList<Rental> listRental = new ArrayList<>();
-        String selectQuery = "SELECT * FROM " + RENTAL_TABLE_NAME +" WHERE "+RENTAL_CUSTOMER_ID+"="+userId;
+        String selectQuery = "SELECT * FROM " + RENTAL_TABLE_NAME +" WHERE "+RENTAL_CUSTOMER_ID+"="+userId +" ORDER BY "+RENTAL_STATUS;
         Cursor cursor = db.rawQuery(selectQuery, null);
         if (cursor.moveToFirst()) {
             do {
