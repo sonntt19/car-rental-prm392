@@ -38,7 +38,7 @@ public class UserProfileActivity extends AppCompatActivity {
     private CircleImageView cImg;
     private TextView tvName, tvEmail;
     private EditText editName, editPhone, editAddress;
-    private Button btnSave;
+    private Button btnSave, btnReset;
     int REQUEST_CODE_CAMERA = 123;
     int REQUEST_CODE_FOLDER = 456;
     User user = DataLocalManager.getUser();
@@ -90,6 +90,14 @@ public class UserProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 chooseImage();
+            }
+        });
+
+        btnReset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(UserProfileActivity.this, ResetPasswordActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -163,6 +171,7 @@ public class UserProfileActivity extends AppCompatActivity {
         editPhone = findViewById(R.id.edit_user_profile_phone);
         editAddress = findViewById(R.id.edit_user_profile_address);
         btnSave = findViewById(R.id.edit_user_profile_save);
+        btnReset = findViewById(R.id.edit_user_profile_reset);
     }
 
     public User createUser(){

@@ -268,6 +268,16 @@ public class DBManager extends SQLiteOpenHelper {
         return check;
     }
 
+    public int updatePassword(String password, int id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(USER_PASSWORD, password);
+
+        int check = db.update(USER_TABLE_NAME, values, USER_ID + "=?", new String[]{id + ""});
+        db.close();
+        return check;
+    }
+
 
     //    Location DAO
     public void addLocation(Location location) {
