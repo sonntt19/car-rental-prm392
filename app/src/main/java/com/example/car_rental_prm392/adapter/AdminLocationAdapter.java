@@ -21,7 +21,7 @@ import com.example.car_rental_prm392.model.Location;
 
 import java.util.List;
 
-public class AdminLocationAdapter extends RecyclerView.Adapter<AdminLocationAdapter.LocationViewHolder>{
+public class AdminLocationAdapter extends RecyclerView.Adapter<AdminLocationAdapter.LocationViewHolder> {
     private Context context;
     private List<Location> listLocations;
 
@@ -40,21 +40,24 @@ public class AdminLocationAdapter extends RecyclerView.Adapter<AdminLocationAdap
     @Override
     public void onBindViewHolder(@NonNull LocationViewHolder holder, int position) {
         Location location = listLocations.get(position);
-        if (location==null){
+        if (location == null) {
             return;
         }
+
+//        Set information for location
         holder.tvId.setText(location.getId() + "");
         holder.tvName.setText(location.getName());
         if (location.getDescription()!=null){
             holder.tvDescription.setText(location.getDescription());
         }
 
-        if(location.getImage()!=null ){
+        if (location.getImage() != null) {
             byte[] image = location.getImage();
             Bitmap bitmap = BitmapFactory.decodeByteArray(image, 0, image.length);
             holder.img.setImageBitmap(bitmap);
         }
 
+//        Click to detail location
         holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -66,12 +69,12 @@ public class AdminLocationAdapter extends RecyclerView.Adapter<AdminLocationAdap
 
     @Override
     public int getItemCount() {
-        if(listLocations!=null)
+        if (listLocations != null)
             return listLocations.size();
         return 0;
     }
 
-    public class LocationViewHolder extends RecyclerView.ViewHolder{
+    public class LocationViewHolder extends RecyclerView.ViewHolder {
         private ImageView img;
         private TextView tvId, tvName, tvDescription;
         private RelativeLayout relativeLayout;
@@ -86,7 +89,8 @@ public class AdminLocationAdapter extends RecyclerView.Adapter<AdminLocationAdap
         }
     }
 
-    public void byBundle(Location location){
+    //    Get location by bundle
+    public void byBundle(Location location) {
         Bundle bundle = new Bundle();
         Intent intent = new Intent(context, AdminLocationDetailActivity.class);
         bundle.putSerializable("location", location);

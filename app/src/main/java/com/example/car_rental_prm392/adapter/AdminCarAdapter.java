@@ -33,7 +33,7 @@ public class AdminCarAdapter extends RecyclerView.Adapter<AdminCarAdapter.CarVie
         this.listCars = listCars;
     }
 
-    public void setFilteredList(List<Car> filteredList){
+    public void setFilteredList(List<Car> filteredList) {
         this.listCars = filteredList;
         notifyDataSetChanged();
     }
@@ -51,8 +51,12 @@ public class AdminCarAdapter extends RecyclerView.Adapter<AdminCarAdapter.CarVie
         if (car == null) {
             return;
         }
+
+//        Get list location
         DBManager dbManager = new DBManager(context);
         ArrayList<Location> listLocations = dbManager.getAllLocation();
+
+//        Set location for each car
         String location = "";
         for (Location o :
                 listLocations) {
@@ -60,17 +64,18 @@ public class AdminCarAdapter extends RecyclerView.Adapter<AdminCarAdapter.CarVie
                 location = o.getName();
         }
 
+//        Set information for car
         holder.tvName.setText(car.getName());
-
         holder.tvLocation.setText(location);
-        holder.tvPrice.setText(car.getPrice()+"$/day");
-        if(car.getImage()!=null ){
+        holder.tvPrice.setText(car.getPrice() + "$/day");
+        if (car.getImage() != null) {
             byte[] image = car.getImage();
             Bitmap bitmap = BitmapFactory.decodeByteArray(image, 0, image.length);
             holder.img.setImageBitmap(bitmap);
         }
 
 
+//        Click detail car
         holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -102,6 +107,7 @@ public class AdminCarAdapter extends RecyclerView.Adapter<AdminCarAdapter.CarVie
         }
     }
 
+    //    Get car by bundle
     public void byBundle(Car car) {
         Bundle bundle = new Bundle();
         Intent intent = new Intent(context, AdminCarDetailActivity.class);

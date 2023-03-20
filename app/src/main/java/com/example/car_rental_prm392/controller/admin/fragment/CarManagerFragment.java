@@ -36,7 +36,7 @@ public class CarManagerFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view =  inflater.inflate(R.layout.fragment_car_manager,container,false);
+        View view = inflater.inflate(R.layout.fragment_car_manager, container, false);
         return view;
     }
 
@@ -44,8 +44,12 @@ public class CarManagerFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         DBManager dbManager = new DBManager(getActivity());
-        listViewCar  = view.findViewById(R.id.admin_car_list);
+
+        listViewCar = view.findViewById(R.id.admin_car_list);
         searchView = view.findViewById(R.id.admin_car_search);
+        btnCreate = view.findViewById(R.id.btn_add_car);
+
+//        Search view for Car name
         searchView.clearFocus();
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -60,16 +64,15 @@ public class CarManagerFragment extends Fragment {
             }
         });
 
+//        Set list car and adapter
         listcars = dbManager.getAllCar();
         carAdapter = new AdminCarAdapter(getActivity(), listcars);
-
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         listViewCar.setLayoutManager(linearLayoutManager);
         listViewCar.setAdapter(carAdapter);
 
-        btnCreate = view.findViewById(R.id.btn_add_car);
 
-
+//        Click to create new Car
         btnCreate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -81,16 +84,17 @@ public class CarManagerFragment extends Fragment {
 
     private void filterList(String newText) {
         List<Car> filterList = new ArrayList<>();
-        for (Car o:
+        for (Car o :
                 listcars) {
-            if (o.getName().toLowerCase().contains(newText.toLowerCase())){
+            if (o.getName().toLowerCase().contains(newText.toLowerCase())) {
                 filterList.add(o);
             }
-            if (filterList.isEmpty()){
+            if (filterList.isEmpty()) {
                 Toast.makeText(getActivity(), "No Car", Toast.LENGTH_LONG).show();
-            }else {
+            } else {
                 carAdapter.setFilteredList(filterList);
             }
         }
     }
+
 }

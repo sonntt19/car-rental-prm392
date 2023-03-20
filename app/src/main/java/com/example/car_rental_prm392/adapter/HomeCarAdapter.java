@@ -35,7 +35,7 @@ public class HomeCarAdapter extends RecyclerView.Adapter<HomeCarAdapter.CarViewH
         this.listCars = listCars;
     }
 
-    public void setFilteredList(List<Car> filteredList){
+    public void setFilteredList(List<Car> filteredList) {
         this.listCars = filteredList;
         notifyDataSetChanged();
     }
@@ -53,6 +53,8 @@ public class HomeCarAdapter extends RecyclerView.Adapter<HomeCarAdapter.CarViewH
         if (car == null) {
             return;
         }
+
+//        Get List location for Location name
         DBManager dbManager = new DBManager(context);
         ArrayList<Location> listLocations = dbManager.getAllLocation();
         String location = "";
@@ -62,17 +64,17 @@ public class HomeCarAdapter extends RecyclerView.Adapter<HomeCarAdapter.CarViewH
                 location = o.getName();
         }
 
+//        Set information for each Car in Home Screen
         holder.tvName.setText(car.getName());
-
-        holder.tvLocation.setText("Location: "+location);
-        holder.tvPrice.setText("Price: "+car.getPrice()+"$/day");
-        if(car.getImage()!=null){
+        holder.tvLocation.setText("Location: " + location);
+        holder.tvPrice.setText("Price: " + car.getPrice() + "$/day");
+        if (car.getImage() != null) {
             byte[] image = car.getImage();
             Bitmap bitmap = BitmapFactory.decodeByteArray(image, 0, image.length);
             holder.img.setImageBitmap(bitmap);
         }
 
-
+//      Click to Car detail in Home Screen
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -104,6 +106,7 @@ public class HomeCarAdapter extends RecyclerView.Adapter<HomeCarAdapter.CarViewH
         }
     }
 
+    //    Get Car by bundle
     public void byBundle(Car car) {
         Bundle bundle = new Bundle();
         Intent intent = new Intent(context, CarDetailActivity.class);

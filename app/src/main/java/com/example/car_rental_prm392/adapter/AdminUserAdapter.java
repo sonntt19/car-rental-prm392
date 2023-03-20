@@ -33,7 +33,7 @@ public class AdminUserAdapter extends RecyclerView.Adapter<AdminUserAdapter.User
         this.listUsers = listUsers;
     }
 
-    public void setFilteredList(List<User> filteredList){
+    public void setFilteredList(List<User> filteredList) {
         this.listUsers = filteredList;
         notifyDataSetChanged();
     }
@@ -48,17 +48,20 @@ public class AdminUserAdapter extends RecyclerView.Adapter<AdminUserAdapter.User
     @Override
     public void onBindViewHolder(@NonNull UserViewHolder holder, int position) {
         User user = listUsers.get(position);
+        if (user == null)
+            return;
 
+//        Set information for each user
         holder.tvName.setText(user.getFullName());
         holder.tvEmail.setText(user.getEmail());
         holder.tvPhone.setText(user.getPhoneNumber());
-        if(user.getAvatar()!=null){
+        if (user.getAvatar() != null) {
             byte[] image = user.getAvatar();
             Bitmap bitmap = BitmapFactory.decodeByteArray(image, 0, image.length);
             holder.img.setImageBitmap(bitmap);
         }
 
-
+//      Click to User detail
         holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -90,6 +93,7 @@ public class AdminUserAdapter extends RecyclerView.Adapter<AdminUserAdapter.User
         }
     }
 
+    //    Get User by bundle
     public void byBundle(User user) {
         Bundle bundle = new Bundle();
         Intent intent = new Intent(context, AdminUserDetailActivity.class);

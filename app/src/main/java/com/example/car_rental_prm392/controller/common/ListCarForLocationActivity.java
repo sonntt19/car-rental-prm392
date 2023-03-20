@@ -21,6 +21,7 @@ public class ListCarForLocationActivity extends AppCompatActivity {
     private HomeCarAdapter carAdapter;
     private ArrayList<Car> listcars;
     private SearchView searchView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,7 +44,7 @@ public class ListCarForLocationActivity extends AppCompatActivity {
             }
         });
         //        List Car
-        listViewCar  = findViewById(R.id.list_car_location);
+        listViewCar = findViewById(R.id.list_car_location);
         listcars = dbManager.getAllCarAvailableForLocation(getIntent().getIntExtra("locationId", 0));
         carAdapter = new HomeCarAdapter(this, listcars);
 
@@ -54,13 +55,13 @@ public class ListCarForLocationActivity extends AppCompatActivity {
 
     private void filterList(String newText) {
         List<Car> filterList = new ArrayList<>();
-        for (Car o:
+        for (Car o :
                 listcars) {
-            if (o.getName().toLowerCase().contains(newText.toLowerCase())){
+            if (o.getName().toLowerCase().contains(newText.toLowerCase())) {
                 filterList.add(o);
             }
-            if (filterList.isEmpty()){
-            }else {
+            if (filterList.isEmpty()) {
+            } else {
                 carAdapter.setFilteredList(filterList);
             }
         }

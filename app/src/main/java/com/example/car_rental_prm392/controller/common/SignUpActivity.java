@@ -17,19 +17,23 @@ import com.google.android.material.textfield.TextInputLayout;
 public class SignUpActivity extends AppCompatActivity {
     private TextInputLayout editFullName, editEmail, editPhoneNumber, editPassword1, editPassword2;
     private Button btnSignUp, btnBack;
+
     DBManager dbManager = new DBManager(this);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_sign_up);
+
         init();
 
+//        Click to Sign up
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 User user = createUser();
-                if (user!=null){
+                if (user != null) {
                     dbManager.addUser(user);
                     Toast.makeText(getApplicationContext(), "Sign Up Successfully", Toast.LENGTH_LONG).show();
                     Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
@@ -37,6 +41,8 @@ public class SignUpActivity extends AppCompatActivity {
                 }
             }
         });
+
+//        Click to back to login
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -55,6 +61,7 @@ public class SignUpActivity extends AppCompatActivity {
         btnSignUp = findViewById(R.id.signup);
         btnBack = findViewById(R.id.back_signin);
     }
+
     private Boolean validateName(){
         String val = editFullName.getEditText().getText().toString();
         String namePattern = "^[0-9-+()]*$";
@@ -144,17 +151,17 @@ public class SignUpActivity extends AppCompatActivity {
         String password1 = editPassword1.getEditText().getText().toString();
         String password2 = editPassword2.getEditText().getText().toString();
         User user = new User(email, password1, fullName, phoneNumber, 0);
-        if(!password1.equals(password2)){
+        if (!password1.equals(password2)) {
             Toast.makeText(getApplicationContext(), "Password not match", Toast.LENGTH_LONG).show();
             return null;
         }
         User userCheck = dbManager.checkUserByEmail(email);
-        if (userCheck!=null){
+        if (userCheck != null) {
             Toast.makeText(getApplicationContext(), "Email Existed", Toast.LENGTH_LONG).show();
             return null;
         }
         userCheck = dbManager.checkUserByPhoneNumber(phoneNumber);
-        if (userCheck!=null){
+        if (userCheck != null) {
             Toast.makeText(getApplicationContext(), "Phone number Existed", Toast.LENGTH_LONG).show();
             return null;
         }
