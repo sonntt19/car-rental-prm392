@@ -13,6 +13,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.car_rental_prm392.R;
@@ -76,7 +77,7 @@ public class AdminCarAdapter extends RecyclerView.Adapter<AdminCarAdapter.CarVie
 
 
 //        Click detail car
-        holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 byBundle(car);
@@ -95,7 +96,7 @@ public class AdminCarAdapter extends RecyclerView.Adapter<AdminCarAdapter.CarVie
     public class CarViewHolder extends RecyclerView.ViewHolder {
         private ImageView img;
         private TextView tvName, tvLocation, tvPrice;
-        private RelativeLayout relativeLayout;
+        private CardView cardView;
 
         public CarViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -103,7 +104,7 @@ public class AdminCarAdapter extends RecyclerView.Adapter<AdminCarAdapter.CarVie
             tvName = itemView.findViewById(R.id.admin_car_name);
             tvLocation = itemView.findViewById(R.id.admin_car_location);
             tvPrice = itemView.findViewById(R.id.admin_car_price);
-            relativeLayout = itemView.findViewById(R.id.admin_car_item);
+            cardView = itemView.findViewById(R.id.admin_car_item);
         }
     }
 
