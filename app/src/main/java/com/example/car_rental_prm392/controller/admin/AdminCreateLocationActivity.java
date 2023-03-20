@@ -74,6 +74,7 @@ public class AdminCreateLocationActivity extends AppCompatActivity {
                     dbManager.addLocation(location);
                     editName.setText("");
                     editDescription.setText("");
+                    img.setImageBitmap(null);
                     Toast.makeText(getApplicationContext(), "Successfully", Toast.LENGTH_LONG).show();
                 }
             }

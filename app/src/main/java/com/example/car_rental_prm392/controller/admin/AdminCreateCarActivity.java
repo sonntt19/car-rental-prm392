@@ -106,6 +106,7 @@ public class AdminCreateCarActivity extends AppCompatActivity {
                     editName.setText("");
                     editDescription.setText("");
                     editPrice.setText("");
+                    img.setImageBitmap(null);
                     Toast.makeText(getApplicationContext(), "Successfully", Toast.LENGTH_LONG).show();
                 }
             }
