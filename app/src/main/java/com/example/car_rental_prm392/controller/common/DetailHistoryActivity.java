@@ -100,7 +100,7 @@ public class DetailHistoryActivity extends AppCompatActivity {
         btnDeal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dbManager.dealRetal(rental.getId());
+                dbManager.dealRetal(rental);
                 Toast.makeText(getApplicationContext(), "Deal", Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(DetailHistoryActivity.this, AdminManagerActivity.class);
                 startActivity(intent);

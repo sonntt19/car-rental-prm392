@@ -7,6 +7,8 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -17,7 +19,9 @@ import com.example.car_rental_prm392.controller.admin.fragment.CarManagerFragmen
 import com.example.car_rental_prm392.controller.admin.fragment.LocationManagerFragment;
 import com.example.car_rental_prm392.controller.admin.fragment.RentalManagerFragment;
 import com.example.car_rental_prm392.controller.admin.fragment.UserManagerFragment;
+import com.example.car_rental_prm392.controller.common.HomeActivity;
 import com.example.car_rental_prm392.controller.common.LoginActivity;
+import com.example.car_rental_prm392.controller.data_local.DataLocalManager;
 import com.google.android.material.navigation.NavigationView;
 
 public class AdminManagerActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -63,8 +67,7 @@ public class AdminManagerActivity extends AppCompatActivity implements Navigatio
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new RentalManagerFragment()).commit();
                 break;
             case R.id.nav_logout:
-                Intent intent = new Intent(AdminManagerActivity.this, LoginActivity.class);
-                startActivity(intent);
+                logout();
                 break;
         }
         drawerLayout.closeDrawer(GravityCompat.START);
@@ -77,6 +80,31 @@ public class AdminManagerActivity extends AppCompatActivity implements Navigatio
         } else {
             super.onBackPressed();
         }
+    }
+
+    private void logout() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Logout");
+        builder.setMessage("Do you want to logout?");
+
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                DataLocalManager.removeUser();
+                Intent intent = new Intent(AdminManagerActivity.this, LoginActivity.class);
+                startActivity(intent);
+            }
+        });
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
     }
 
 }

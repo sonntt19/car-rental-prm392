@@ -66,9 +66,12 @@ public class HomeCarAdapter extends RecyclerView.Adapter<HomeCarAdapter.CarViewH
 
         holder.tvLocation.setText("Location: "+location);
         holder.tvPrice.setText("Price: "+car.getPrice()+"$/day");
-        byte[] image = car.getImage();
-        Bitmap bitmap = BitmapFactory.decodeByteArray(image, 0, image.length);
-        holder.img.setImageBitmap(bitmap);
+        if(car.getImage()!=null){
+            byte[] image = car.getImage();
+            Bitmap bitmap = BitmapFactory.decodeByteArray(image, 0, image.length);
+            holder.img.setImageBitmap(bitmap);
+        }
+
 
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override

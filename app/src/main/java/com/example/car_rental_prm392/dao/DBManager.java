@@ -554,14 +554,17 @@ public class DBManager extends SQLiteOpenHelper {
         db.close();
         return check;
     }
-    public int dealRetal(int retalId) {
+    public int dealRetal(Rental retal) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         LocalDateTime now = LocalDateTime.now();
         values.put(RENTAL_STATUS, 2);
         values.put(RENTAL_START_DATE,dtf.format(now));
-        int check = db.update(RENTAL_TABLE_NAME, values, RENTAL_ID + "=?", new String[]{retalId + ""});
+        int check = db.update(RENTAL_TABLE_NAME, values, RENTAL_ID + "=?", new String[]{retal.getId() + ""});
+        values = new ContentValues();
+        values.put(CAR_STATUS, 0);
+        check = db.update(CAR_TABLE_NAME,values,CAR_ID +"=?", new String[]{retal.getCarId() + ""});
         db.close();
         return check;
     }
