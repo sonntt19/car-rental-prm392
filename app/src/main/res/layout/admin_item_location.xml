@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginRight="10dp"
+    android:layout_marginLeft="10dp"
+    android:layout_marginTop="10dp"
     android:id="@+id/admin_location_item"
     >
 
@@ -14,6 +17,7 @@
             android:id="@+id/admin_location_img"
             android:layout_width="100dp"
             android:layout_height="100dp"
+            android:layout_marginLeft="10dp"
             android:gravity="center"
             android:src="@drawable/car"
             />
@@ -89,4 +93,4 @@
 
 
     </LinearLayout>
-</RelativeLayout>
+</androidx.cardview.widget.CardView>

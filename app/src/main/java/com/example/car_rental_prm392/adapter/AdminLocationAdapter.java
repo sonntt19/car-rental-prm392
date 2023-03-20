@@ -45,7 +45,10 @@ public class AdminLocationAdapter extends RecyclerView.Adapter<AdminLocationAdap
         }
         holder.tvId.setText(location.getId() + "");
         holder.tvName.setText(location.getName());
-        holder.tvDescription.setText(location.getDescription());
+        if (location.getDescription()!=null){
+            holder.tvDescription.setText(location.getDescription());
+        }
+
         if(location.getImage()!=null ){
             byte[] image = location.getImage();
             Bitmap bitmap = BitmapFactory.decodeByteArray(image, 0, image.length);

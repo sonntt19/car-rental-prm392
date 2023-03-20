@@ -47,6 +47,9 @@ public class ResetPasswordActivity extends AppCompatActivity {
         btnReset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(!validateOldPassword() | !validateNewPassword1() | !validateNewPassword2()){
+                    return;
+                }
                 User userReset = dbManager.getUserById(user.getUserId());
                 String oldPass = editOldPass.getText().toString();
                 String newPass1 = editNewPass1.getText().toString();
@@ -74,5 +77,38 @@ public class ResetPasswordActivity extends AppCompatActivity {
         editNewPass1 = findViewById(R.id.reset_password_newPass1);
         editNewPass2 = findViewById(R.id.reset_password_newPass2);
         btnReset = findViewById(R.id.btn_reset_password);
+    }
+    private Boolean validateOldPassword(){
+        String val = editOldPass.getText().toString();
+        if (val.isEmpty()){
+            editOldPass.setError("Old password cannot be empty");
+            return false;
+        }
+        else {
+            editOldPass.setError(null);
+            return true;
+        }
+    }
+    private Boolean validateNewPassword1(){
+        String val = editNewPass1.getText().toString();
+        if (val.isEmpty()){
+            editNewPass1.setError("New password 1 cannot be empty");
+            return false;
+        }
+        else {
+            editNewPass1.setError(null);
+            return true;
+        }
+    }
+    private Boolean validateNewPassword2(){
+        String val = editOldPass.getText().toString();
+        if (val.isEmpty()){
+            editNewPass2.setError("New password 2 cannot be empty");
+            return false;
+        }
+        else {
+            editNewPass2.setError(null);
+            return true;
+        }
     }
 }

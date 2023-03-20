@@ -175,6 +175,9 @@ public class UserProfileActivity extends AppCompatActivity {
     }
 
     public User createUser(){
+        if(!validateName() | !validateAddress() | !validatePhone()){
+            return null;
+        }
         BitmapDrawable bitmapDrawable = (BitmapDrawable) cImg.getDrawable();
         Bitmap bitmap = bitmapDrawable.getBitmap();
         ByteArrayOutputStream byteArray = new ByteArrayOutputStream();
@@ -186,5 +189,47 @@ public class UserProfileActivity extends AppCompatActivity {
         String address = editAddress.getText().toString();
         User user = new User(fullName, phoneNumber, address, image);
         return user;
+    }
+    private Boolean validatePhone(){
+        String val = editPhone.getText().toString();
+        String phonePattern = "^(84|0[3|5|7|8|9])+([0-9]{8})\\b";
+        if (val.isEmpty()){
+            editPhone.setError("Phone cannot be empty");
+            return false;
+        }
+        else if(!val.matches(phonePattern)){
+            editPhone.setError("Invalid phone");
+            return false;
+        }
+        else {
+            editPhone.setError(null);
+            return true;
+        }
+    }
+    private Boolean validateName(){
+        String val = editName.getText().toString();
+        if (val.isEmpty()){
+            editName.setError("Name cannot be empty");
+            return false;
+        }
+        else if(val.length() <= 10){
+            editName.setError("Password too long");
+            return false;
+        }
+        else {
+            editName.setError(null);
+            return true;
+        }
+    }
+    private Boolean validateAddress(){
+        String val = editAddress.getText().toString();
+        if (val.isEmpty()){
+            editAddress.setError("Address cannot be empty");
+            return false;
+        }
+        else {
+            editAddress.setError(null);
+            return true;
+        }
     }
 }

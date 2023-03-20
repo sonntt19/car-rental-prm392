@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@drawable/background_home"
     tools:context=".controller.common.HomeActivity">
 
     <ScrollView
@@ -32,7 +33,7 @@
                     android:layout_marginStart="32dp"
                     android:layout_marginTop="32dp"
                     android:text="Hi CusName"
-                    android:textColor="#FD3E3E"
+                    android:textColor="#FFFFFF"
                     android:textSize="20sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
@@ -43,7 +44,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Rental &amp; Drive"
-                    android:textColor="#000000"
+                    android:textColor="#FFFFFF"
                     android:textSize="17dp"
                     app:layout_constraintStart_toStartOf="@+id/home_account_name"
                     app:layout_constraintTop_toBottomOf="@+id/home_account_name" />
@@ -53,7 +54,7 @@
                     android:layout_width="75dp"
                     android:layout_height="61dp"
                     android:layout_marginEnd="16dp"
-                    android:src="@drawable/logout_btn"
+                    android:src="@drawable/ic_baseline_logout_24"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/home_account_name"
@@ -68,8 +69,8 @@
                     android:layout_marginStart="28dp"
                     android:layout_marginTop="28dp"
                     android:text="Locations"
-                    android:textColor="#000"
-                    android:textSize="18sp"
+                    android:textColor="#FFFFFF"
+                    android:textSize="25sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView1"
                     tools:textStyle="bold" />
@@ -91,8 +92,8 @@
                     android:layout_marginStart="28dp"
                     android:layout_marginTop="12dp"
                     android:text="List Car"
-                    android:textColor="#000"
-                    android:textSize="18sp"
+                    android:textColor="#FFFFFF"
+                    android:textSize="25sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/home_rv_location" />

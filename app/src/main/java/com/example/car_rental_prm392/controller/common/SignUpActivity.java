@@ -55,8 +55,89 @@ public class SignUpActivity extends AppCompatActivity {
         btnSignUp = findViewById(R.id.signup);
         btnBack = findViewById(R.id.back_signin);
     }
-
+    private Boolean validateName(){
+        String val = editFullName.getEditText().getText().toString();
+        String namePattern = "^[0-9-+()]*$";
+        if (val.isEmpty()){
+            editFullName.setError("Full name cannot be empty");
+            return false;
+        }
+        else if(val.contains(namePattern)){
+            editEmail.setError("Invalid name");
+            return false;
+        }
+        else {
+            editFullName.setError(null);
+            editFullName.setErrorEnabled(false);
+            return true;
+        }
+    }
+    private Boolean validateEmail(){
+        String val = editEmail.getEditText().getText().toString();
+        String emailPattern = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$";
+        if (val.isEmpty()){
+            editEmail.setError("Email cannot be empty");
+            return false;
+        }
+        else if(!val.matches(emailPattern)){
+            editEmail.setError("Invalid email");
+            return false;
+        }
+        else {
+            editEmail.setError(null);
+            editEmail.setErrorEnabled(false);
+            return true;
+        }
+    }
+    private Boolean validatePhone(){
+        String val = editPhoneNumber.getEditText().getText().toString();
+        String phonePattern = "^(84|0[3|5|7|8|9])+([0-9]{8})\\b";
+        if (val.isEmpty()){
+            editPhoneNumber.setError("Phone cannot be empty");
+            return false;
+        }
+        else if(!val.matches(phonePattern)){
+            editPhoneNumber.setError("Invalid phone");
+            return false;
+        }
+        else {
+            editPhoneNumber.setError(null);
+            editPhoneNumber.setErrorEnabled(false);
+            return true;
+        }
+    }
+    private Boolean validatePassword1(){
+        String val = editPassword1.getEditText().getText().toString();
+        if (val.isEmpty()){
+            editPassword1.setError("Password cannot be empty");
+            return false;
+        }
+        else if(val.length() <= 10){
+            editPassword1.setError("Password too long");
+            return false;
+        }
+        else {
+            editPassword1.setError(null);
+            editPassword1.setErrorEnabled(false);
+            return true;
+        }
+    }
+    private Boolean validatePassword2(){
+        String val = editPassword2.getEditText().getText().toString();
+        if (val.isEmpty()){
+            editPassword2.setError("Password cannot be empty");
+            return false;
+        }
+        else {
+            editPassword2.setError(null);
+            editPassword2.setErrorEnabled(false);
+            return true;
+        }
+    }
     public User createUser(){
+        if(!validateName() | !validateEmail() | !validatePhone() | !validatePassword1() | !validatePassword2()){
+            return null;
+        }
         String fullName = editFullName.getEditText().getText().toString();
         String email = editEmail.getEditText().getText().toString();
         String phoneNumber = editPhoneNumber.getEditText().getText().toString();
@@ -79,4 +160,6 @@ public class SignUpActivity extends AppCompatActivity {
         }
         return user;
     }
+
+
 }

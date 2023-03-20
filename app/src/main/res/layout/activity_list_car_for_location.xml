@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".controller.common.ListCarForLocationActivity">
+    android:background="@drawable/background_home"
+    tools:context=".controller.common.ListCarForLocationActivity"
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/location"
@@ -14,7 +16,8 @@
         android:gravity="center"
         android:padding="16dp"
         android:text="List Car"
-        android:textSize="20sp"
+        android:textColor="@color/white"
+        android:textSize="25sp"
         android:textStyle="bold"
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_editor_absoluteX="-16dp" />
@@ -27,6 +30,7 @@
         app:iconifiedByDefault="false"
         app:layout_constraintTop_toBottomOf="@+id/location"
         app:queryHint="Search"
+        android:background="@color/white"
         tools:layout_editor_absoluteX="26dp" />
 
     <TableLayout
@@ -44,9 +48,9 @@
         android:id="@+id/list_car_location"
         android:paddingTop="20dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/list_car_table"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

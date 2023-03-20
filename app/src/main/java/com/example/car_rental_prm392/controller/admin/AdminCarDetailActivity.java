@@ -106,7 +106,9 @@ public class AdminCarDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Car carLast = createCar();
-
+                if(!validateCarName() | !validateDescription() | !validatePrice()){
+                    return;
+                }
                 if (carLast!= null){
                     dbManager.updateCar(carLast,car.getId());
                     Toast.makeText(getApplicationContext(), "Update Successfully", Toast.LENGTH_LONG).show();
@@ -168,6 +170,40 @@ public class AdminCarDetailActivity extends AppCompatActivity {
 
 
     }
+    private Boolean validateCarName(){
+        String val = editName.getText().toString();
+        if (val.isEmpty()){
+            editName.setError("Car name cannot be empty");
+            return false;
+        }
+        else {
+            editName.setError(null);
+            return true;
+        }
+    }
+    private Boolean validateDescription(){
+        String val = editDescription.getText().toString();
+        if (val.isEmpty()){
+            editDescription.setError("Description cannot be empty");
+            return false;
+        }
+        else {
+            editDescription.setError(null);
+            return true;
+        }
+    }
+    private Boolean validatePrice(){
+        String val = editPrice.getText().toString();
+        if (val.isEmpty()){
+            editPrice.setError("Price cannot be empty");
+            return false;
+        }
+        else {
+            editPrice.setError(null);
+            return true;
+        }
+    }
+
     public void delete(int id){
         DBManager dbManager = new DBManager(this);
 

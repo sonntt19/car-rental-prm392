@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -89,6 +90,7 @@ public class AdminCreateCarActivity extends AppCompatActivity {
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Car car = createCar();
 
                 if (car!= null){
@@ -133,6 +135,9 @@ public class AdminCreateCarActivity extends AppCompatActivity {
         completeTextView = findViewById(R.id.admin_car_auto_complete);
     }
     private Car createCar(){
+        if(!validateCarName() | !validateDescription() | !validatePrice() | !validateLocation() | !validateImage()){
+            return null;
+        }
         byte[] image = null;
         BitmapDrawable bitmapDrawable = (BitmapDrawable) img.getDrawable();
         if (bitmapDrawable != null) {
@@ -151,5 +156,58 @@ public class AdminCreateCarActivity extends AppCompatActivity {
 
         Car car = new Car(name,description,price,image,1,idLocation);
         return car;
+    }
+    private Boolean validateCarName(){
+        String val = editName.getText().toString();
+        if (val.isEmpty()){
+            editName.setError("Car name cannot be empty");
+            return false;
+        }
+        else {
+            editName.setError(null);
+            return true;
+        }
+    }
+    private Boolean validateDescription(){
+        String val = editDescription.getText().toString();
+        if (val.isEmpty()){
+            editDescription.setError("Description cannot be empty");
+            return false;
+        }
+        else {
+            editDescription.setError(null);
+            return true;
+        }
+    }
+    private Boolean validatePrice(){
+        String val = editPrice.getText().toString();
+        if (val.isEmpty()){
+            editPrice.setError("Price cannot be empty");
+            return false;
+        }
+        else {
+            editPrice.setError(null);
+            return true;
+        }
+    }
+    private Boolean validateLocation(){
+        String val = completeTextView.getText().toString();
+        if (val.isEmpty()){
+            completeTextView.setError("Location cannot be empty");
+            return false;
+        }
+        else {
+            completeTextView.setError(null);
+            return true;
+        }
+    }
+    private Boolean validateImage(){
+        Drawable drawable = img.getDrawable();
+        if (drawable == null) {
+            Toast.makeText(this, "Image cannot be empty", Toast.LENGTH_SHORT).show();
+            return false;
+        } else {
+            return true;
+        }
     }
 }

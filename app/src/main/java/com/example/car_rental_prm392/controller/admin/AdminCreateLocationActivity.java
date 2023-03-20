@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -106,6 +107,9 @@ public class AdminCreateLocationActivity extends AppCompatActivity {
         img = findViewById((R.id.add_location_img_test));
     }
     private Location createLocation(){
+        if(!validateLocationName() | !validateDescription() | !validateImage()){
+            return null;
+        }
         DBManager dbManager = new DBManager(this);
         byte[] image = null;
         BitmapDrawable bitmapDrawable = (BitmapDrawable) img.getDrawable();
@@ -129,5 +133,36 @@ public class AdminCreateLocationActivity extends AppCompatActivity {
         }
         Location location = new Location(name, description,image);
         return location;
+    }
+    private Boolean validateLocationName(){
+        String val = editName.getText().toString();
+        if (val.isEmpty()){
+            editName.setError("Location name cannot be empty");
+            return false;
+        }
+        else {
+            editName.setError(null);
+            return true;
+        }
+    }
+    private Boolean validateDescription(){
+        String val = editDescription.getText().toString();
+        if (val.isEmpty()){
+            editDescription.setError("Description cannot be empty");
+            return false;
+        }
+        else {
+            editDescription.setError(null);
+            return true;
+        }
+    }
+    private Boolean validateImage(){
+        Drawable drawable = img.getDrawable();
+        if (drawable == null) {
+            Toast.makeText(this, "Image cannot be empty", Toast.LENGTH_SHORT).show();
+            return false;
+        } else {
+            return true;
+        }
     }
 }

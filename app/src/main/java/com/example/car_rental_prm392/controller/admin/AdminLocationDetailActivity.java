@@ -53,7 +53,10 @@ public class AdminLocationDetailActivity extends AppCompatActivity {
 
         tvId.setText(location.getId()+"");
         editName.setText(location.getName());
-        editDescription.setText(location.getDescription());
+        if (location.getDescription()!=null){
+            editDescription.setText(location.getDescription());
+        }
+
         if(location.getImage()!=null){
             Bitmap bitmap = BitmapFactory.decodeByteArray(location.getImage(), 0, location.getImage().length);
             img.setImageBitmap(bitmap);
@@ -71,7 +74,9 @@ public class AdminLocationDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Location locationLast = createLocation();
-
+                if(!validateLocationName() | !validateDescription() | !validateDescription()){
+                    return;
+                }
                 if (locationLast!= null){
                     dbManager.updateLocation(locationLast,location.getId());
                     Toast.makeText(getApplicationContext(), "Update Successfully", Toast.LENGTH_LONG).show();
@@ -156,6 +161,28 @@ public class AdminLocationDetailActivity extends AppCompatActivity {
 
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
+    }
+    private Boolean validateLocationName(){
+        String val = editName.getText().toString();
+        if (val.isEmpty()){
+            editName.setError("Location name cannot be empty");
+            return false;
+        }
+        else {
+            editName.setError(null);
+            return true;
+        }
+    }
+    private Boolean validateDescription(){
+        String val = editDescription.getText().toString();
+        if (val.isEmpty()){
+            editDescription.setError("Description cannot be empty");
+            return false;
+        }
+        else {
+            editDescription.setError(null);
+            return true;
+        }
     }
 
     private Location createLocation(){
