@@ -50,6 +50,8 @@ public class HistoryRentalAdapter extends RecyclerView.Adapter<HistoryRentalAdap
         if (rental == null) {
             return;
         }
+
+//        Get list User for User full name
         DBManager dbManager = new DBManager(context);
         ArrayList<User> listUser = dbManager.getAllUser();
         String customerName = "";
@@ -57,28 +59,33 @@ public class HistoryRentalAdapter extends RecyclerView.Adapter<HistoryRentalAdap
             if (o.getUserId() == rental.getCustomerId())
                 customerName = o.getFullName();
         }
+
+//        Get list Car for Car name
         ArrayList<Car> listCar = dbManager.getAllCar();
         String carName = "";
         for (Car o : listCar) {
             if (o.getId() == rental.getCarId())
                 carName = o.getName();
         }
+
+//      Get status name
         String status = "";
-        if (rental.getStatus()==1)
+        if (rental.getStatus() == 1)
             status = "Waiting";
-        else if (rental.getStatus()==2)
+        else if (rental.getStatus() == 2)
             status = "Renting";
-        else if (rental.getStatus()==3)
+        else if (rental.getStatus() == 3)
             status = "End";
-        else if (rental.getStatus()==4)
+        else if (rental.getStatus() == 4)
             status = "Cancel";
 
+//        Set information for each Rental
         holder.tvId.setText(rental.getId() + "");
         holder.tvCustomer.setText(customerName);
         holder.tvCar.setText(carName);
-
         holder.tvStatus.setText(status);
 
+//        Click to Rental detail
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -109,6 +116,7 @@ public class HistoryRentalAdapter extends RecyclerView.Adapter<HistoryRentalAdap
         }
     }
 
+    //    Get Rental by bundle
     public void byBundle(Rental rental) {
         Bundle bundle = new Bundle();
         Intent intent = new Intent(context, DetailHistoryActivity.class);

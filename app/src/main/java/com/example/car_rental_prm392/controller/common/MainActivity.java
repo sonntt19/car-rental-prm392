@@ -21,17 +21,20 @@ import com.example.car_rental_prm392.model.User;
 
 public class MainActivity extends AppCompatActivity {
     private static final User ADMIN = new User("admin@gmail.com","123456789","Admin","123456789",1);
+
     private static int SPLASH_SCREEN = 4000;
     Animation topAnimation, botAnimation;
     ImageView image;
     TextView logo;
-    private String ss;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
         DBManager dbManager = new DBManager(this);
+
+//        Set admin for first run
         if(dbManager.checkUser("admin@gmail.com","123456789")==null){
             dbManager.addUser(ADMIN);
         }

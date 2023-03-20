@@ -38,14 +38,16 @@ public class RentalManagerFragment extends Fragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_rental_manager, container, false);
     }
+
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         DBManager dbManager = new DBManager(getActivity());
-        listViewRental  = view.findViewById(R.id.history_rv_rental);
+
+        listViewRental = view.findViewById(R.id.history_rv_rental);
+
+//        Get list Rental and set adapter
         listRentals = dbManager.getAllRental();
-
         historyRentalAdapter = new HistoryRentalAdapter(getActivity(), listRentals);
-
         LinearLayoutManager linearLayoutManagerLocation = new LinearLayoutManager(getActivity());
         listViewRental.setLayoutManager(linearLayoutManagerLocation);
         listViewRental.setAdapter(historyRentalAdapter);

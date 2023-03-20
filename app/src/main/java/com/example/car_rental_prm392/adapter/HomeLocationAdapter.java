@@ -22,7 +22,7 @@ import com.example.car_rental_prm392.model.Location;
 
 import java.util.List;
 
-public class HomeLocationAdapter extends RecyclerView.Adapter<HomeLocationAdapter.LocationViewHolder>{
+public class HomeLocationAdapter extends RecyclerView.Adapter<HomeLocationAdapter.LocationViewHolder> {
     private Context context;
     private List<Location> listLocations;
 
@@ -41,19 +41,24 @@ public class HomeLocationAdapter extends RecyclerView.Adapter<HomeLocationAdapte
     @Override
     public void onBindViewHolder(@NonNull LocationViewHolder holder, int position) {
         Location location = listLocations.get(position);
-        if (location==null){
+        if (location == null) {
             return;
         }
-        holder.tvName.setText(location.getName());
-        byte[] image = location.getImage();
-        Bitmap bitmap = BitmapFactory.decodeByteArray(image, 0, image.length);
-        holder.img.setImageBitmap(bitmap);
 
+//        Set information for each location
+        holder.tvName.setText(location.getName());
+        if (location.getImage() != null) {
+            byte[] image = location.getImage();
+            Bitmap bitmap = BitmapFactory.decodeByteArray(image, 0, image.length);
+            holder.img.setImageBitmap(bitmap);
+        }
+
+//      Click to List Car for location
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, ListCarForLocationActivity.class);
-                intent.putExtra("locationId",location.getId());
+                intent.putExtra("locationId", location.getId());
                 context.startActivity(intent);
             }
         });
@@ -62,12 +67,12 @@ public class HomeLocationAdapter extends RecyclerView.Adapter<HomeLocationAdapte
 
     @Override
     public int getItemCount() {
-        if(listLocations!=null)
+        if (listLocations != null)
             return listLocations.size();
         return 0;
     }
 
-    public class LocationViewHolder extends RecyclerView.ViewHolder{
+    public class LocationViewHolder extends RecyclerView.ViewHolder {
         private ImageView img;
         private TextView tvName;
         private CardView cardView;

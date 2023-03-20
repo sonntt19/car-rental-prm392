@@ -36,21 +36,23 @@ public class LocationManagerFragment extends Fragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_location_manager, container, false);
     }
+
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         DBManager dbManager = new DBManager(getActivity());
-        listViewLocation  = view.findViewById(R.id.admin_rv_location);
+
+//        Declare view
+        listViewLocation = view.findViewById(R.id.admin_rv_location);
+        btnCreate = view.findViewById(R.id.btn_add_location);
+
+//        Get list Location and set adapter
         listLocations = dbManager.getAllLocation();
-
         adminLocationAdapter = new AdminLocationAdapter(getActivity(), listLocations);
-
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         listViewLocation.setLayoutManager(linearLayoutManager);
         listViewLocation.setAdapter(adminLocationAdapter);
 
-        btnCreate = view.findViewById(R.id.btn_add_location);
-
-
+//      Click to create new Location
         btnCreate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

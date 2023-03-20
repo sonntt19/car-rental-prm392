@@ -32,15 +32,19 @@ import java.io.InputStream;
 import java.util.ArrayList;
 
 public class AdminCreateCarActivity extends AppCompatActivity {
-    private EditText editName,editDescription, editPrice;
+    private EditText editName, editDescription, editPrice;
     private Button btnSave;
     private ImageView img;
     private ImageButton ibtnCamera, ibtnFolder;
+
     int REQUEST_CODE_CAMERA = 123;
     int REQUEST_CODE_FOLDER = 456;
+
     AutoCompleteTextView completeTextView;
+
     ArrayAdapter<String> adapterItems;
     ArrayList<Location> listLocations;
+
     int idLocation = 0;
 
     @Override
@@ -48,27 +52,33 @@ public class AdminCreateCarActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_create_car);
         DBManager dbManager = new DBManager(this);
+
+//        Get list location for Location name
         listLocations = dbManager.getAllLocation();
         String[] stringArray = new String[listLocations.size()];
-
         for (int i = 0; i < listLocations.size(); i++) {
             stringArray[i] = listLocations.get(i).getName();
         }
+
         init();
-        adapterItems = new ArrayAdapter<String>(this, R.layout.list_item,stringArray);
+
+//        Set adapter and list select location
+        adapterItems = new ArrayAdapter<String>(this, R.layout.list_item, stringArray);
         completeTextView.setAdapter(adapterItems);
 
+//        Click to select location for car
         completeTextView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                for (Location o:
-                     listLocations) {
-                    if(o.getName().equalsIgnoreCase(stringArray[position]))
+                for (Location o :
+                        listLocations) {
+                    if (o.getName().equalsIgnoreCase(stringArray[position]))
                         idLocation = o.getId();
                 }
             }
         });
 
+//        Set image
         ibtnCamera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -85,13 +95,13 @@ public class AdminCreateCarActivity extends AppCompatActivity {
             }
         });
 
-
+//      Click to save new car
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Car car = createCar();
 
-                if (car!= null){
+                if (car != null) {
                     dbManager.addCar(car);
                     editName.setText("");
                     editDescription.setText("");
@@ -105,11 +115,11 @@ public class AdminCreateCarActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        if(requestCode == REQUEST_CODE_CAMERA && resultCode == RESULT_OK && data != null){
+        if (requestCode == REQUEST_CODE_CAMERA && resultCode == RESULT_OK && data != null) {
             Bitmap bitmap = (Bitmap) data.getExtras().get("data");
             img.setImageBitmap(bitmap);
         }
-        if(requestCode == REQUEST_CODE_FOLDER && resultCode == RESULT_OK && data != null){
+        if (requestCode == REQUEST_CODE_FOLDER && resultCode == RESULT_OK && data != null) {
             Uri uri = data.getData();
             try {
                 InputStream inputStream = getContentResolver().openInputStream(uri);
@@ -122,25 +132,26 @@ public class AdminCreateCarActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
     }
 
-    public void init(){
-        editName=findViewById(R.id.add_car_name);
-        editDescription=findViewById(R.id.add_car_description);
-        editPrice=findViewById(R.id.add_car_price);
-        btnSave=findViewById(R.id.add_car_save);
-        ibtnCamera=findViewById(R.id.add_car_camera);
-        ibtnFolder=findViewById(R.id.add_car_folder);
+    public void init() {
+        editName = findViewById(R.id.add_car_name);
+        editDescription = findViewById(R.id.add_car_description);
+        editPrice = findViewById(R.id.add_car_price);
+        btnSave = findViewById(R.id.add_car_save);
+        ibtnCamera = findViewById(R.id.add_car_camera);
+        ibtnFolder = findViewById(R.id.add_car_folder);
         img = findViewById((R.id.add_car_img_test));
         completeTextView = findViewById(R.id.admin_car_auto_complete);
     }
-    private Car createCar(){
+
+    private Car createCar() {
         byte[] image = null;
         BitmapDrawable bitmapDrawable = (BitmapDrawable) img.getDrawable();
         if (bitmapDrawable != null) {
             Bitmap bitmap = bitmapDrawable.getBitmap();
             ByteArrayOutputStream byteArray = new ByteArrayOutputStream();
-            bitmap.compress(Bitmap.CompressFormat.PNG,100,byteArray);
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArray);
             image = byteArray.toByteArray();
-            // sử dụng bitmap
+            // use bitmap
         } else {
             image = null;
         }
@@ -149,7 +160,7 @@ public class AdminCreateCarActivity extends AppCompatActivity {
         String description = editDescription.getText().toString();
         double price = Double.parseDouble(editPrice.getText().toString());
 
-        Car car = new Car(name,description,price,image,1,idLocation);
+        Car car = new Car(name, description, price, image, 1, idLocation);
         return car;
     }
 }

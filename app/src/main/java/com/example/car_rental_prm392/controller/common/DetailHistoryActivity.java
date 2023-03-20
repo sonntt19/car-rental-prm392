@@ -33,63 +33,73 @@ import java.util.concurrent.TimeUnit;
 public class DetailHistoryActivity extends AppCompatActivity {
     private TextView tvId, tvCustomer, tvCar, tvStartDate, tvEndDate, tvTotal, tvStatus;
     private Button btnCancel, btnDeal, btnFinish;
+
     private User user = DataLocalManager.getUser();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_history);
         DBManager dbManager = new DBManager(this);
+
+//        Get History detail from intent
         Intent intent = getIntent();
         Bundle bundle = getIntent().getExtras();
-        if (bundle == null){
+        if (bundle == null) {
             return;
         }
         Rental rental = (Rental) bundle.get("rental");
+
         init();
+
+//        Set information for History detail
         User customer = dbManager.getUserById(rental.getCustomerId());
-        Car car = dbManager.getCarById(rental.getCarId());;
+        Car car = dbManager.getCarById(rental.getCarId());
+        ;
         String status = "";
-        tvId.setText(rental.getId()+"");
+        tvId.setText(rental.getId() + "");
         tvCustomer.setText(customer.getFullName());
         tvCar.setText(car.getName());
-        if(rental.getStartDate()!=null){
+        if (rental.getStartDate() != null) {
             tvStartDate.setText(rental.getStartDate());
         }
-        if(rental.getEndDate()!=null){
+        if (rental.getEndDate() != null) {
             tvEndDate.setText(rental.getEndDate());
         }
-        tvTotal.setText(rental.getTotalCost()+"");
+        tvTotal.setText(rental.getTotalCost() + "");
 
-        if (rental.getStatus()==1)
+        if (rental.getStatus() == 1)
             status = "Waiting";
-        else if (rental.getStatus()==2)
+        else if (rental.getStatus() == 2)
             status = "Renting";
-        else if (rental.getStatus()==3)
+        else if (rental.getStatus() == 3)
             status = "End";
-        else if (rental.getStatus()==4)
+        else if (rental.getStatus() == 4)
             status = "Cancel";
         tvStatus.setText(status);
-        if (rental.getStatus()!=1){
+
+//        Set visibility for each role and status
+        if (rental.getStatus() != 1) {
             btnCancel.setVisibility(View.GONE);
         }
-        if (user.getRoleId()==1 && rental.getStatus()==1){
+        if (user.getRoleId() == 1 && rental.getStatus() == 1) {
             btnDeal.setVisibility(View.VISIBLE);
         }
-        if (user.getRoleId()==1 && rental.getStatus()==2){
+        if (user.getRoleId() == 1 && rental.getStatus() == 2) {
             btnDeal.setVisibility(View.GONE);
             btnFinish.setVisibility(View.VISIBLE);
         }
 
-
+//      Click to cancel rental
         btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dbManager.cancelRetal(rental.getId());
                 Toast.makeText(getApplicationContext(), "Canceled", Toast.LENGTH_LONG).show();
-                if (user.getRoleId()==0){
+                if (user.getRoleId() == 0) {
                     Intent intent = new Intent(DetailHistoryActivity.this, HistoryActivity.class);
                     startActivity(intent);
-                }else {
+                } else {
                     Intent intent = new Intent(DetailHistoryActivity.this, AdminManagerActivity.class);
                     startActivity(intent);
                 }
@@ -97,6 +107,7 @@ public class DetailHistoryActivity extends AppCompatActivity {
             }
         });
 
+//        Click to deal for admin
         btnDeal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -107,6 +118,7 @@ public class DetailHistoryActivity extends AppCompatActivity {
             }
         });
 
+//        Click to finish for admin
         btnFinish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -115,10 +127,10 @@ public class DetailHistoryActivity extends AppCompatActivity {
 
                 String start = rental.getStartDate();
                 String end = dtf.format(now);
-                int diff=1+daysBetweenDates(start,end);
+                int diff = 1 + daysBetweenDates(start, end);
                 Double total = car.getPrice() * diff;
 
-                dbManager.finishRetal(rental.getId(),end, total);
+                dbManager.finishRetal(rental.getId(), end, total);
                 Toast.makeText(getApplicationContext(), "finish", Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(DetailHistoryActivity.this, AdminManagerActivity.class);
                 startActivity(intent);
@@ -128,7 +140,7 @@ public class DetailHistoryActivity extends AppCompatActivity {
 
     }
 
-    public void init(){
+    public void init() {
         tvId = findViewById(R.id.history_detail_id);
         tvCustomer = findViewById(R.id.history_detail_customer);
         tvCar = findViewById(R.id.history_detail_car);

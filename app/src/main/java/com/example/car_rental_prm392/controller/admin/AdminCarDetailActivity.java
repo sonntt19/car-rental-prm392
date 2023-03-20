@@ -39,82 +39,100 @@ public class AdminCarDetailActivity extends AppCompatActivity {
     private EditText editName, editDescription, editPrice;
     private ImageView img;
     private ImageButton ibtnCamera, ibtnFolder;
+
     int REQUEST_CODE_CAMERA = 123;
     int REQUEST_CODE_FOLDER = 456;
+
     private Button btnDelete, btnUpdate;
+
     AutoCompleteTextView completeTextView;
+
     ArrayAdapter<String> adapterItems;
     ArrayList<Location> listLocations;
+
     int idLocation = 0;
     String selected;
+
     TextInputLayout textInputLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_car_detail);
         DBManager dbManager = new DBManager(this);
+
+//        Get Car from Intent
         Intent intent = getIntent();
         Bundle bundle = getIntent().getExtras();
-        if (bundle == null){
+        if (bundle == null) {
             return;
         }
         Car car = (Car) bundle.get("car");
+
+//        Get list location for Location name
         listLocations = dbManager.getAllLocation();
         String[] stringArray = new String[listLocations.size()];
-
-
         for (int i = 0; i < listLocations.size(); i++) {
             stringArray[i] = listLocations.get(i).getName();
         }
-        for (Location o:
+        for (Location o :
                 listLocations) {
-            if(o.getId()== car.getLocationId())
+            if (o.getId() == car.getLocationId())
                 selected = o.getName();
         }
+
         init();
-        adapterItems = new ArrayAdapter<String>(this, R.layout.list_item,stringArray);
+
+//        Set adapter and list select location
+        adapterItems = new ArrayAdapter<String>(this, R.layout.list_item, stringArray);
         completeTextView.setAdapter(adapterItems);
         textInputLayout.setHint(selected);
+
+//        Click to select location for car
         completeTextView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                for (Location o:
+                for (Location o :
                         listLocations) {
-                    if(o.getName().equalsIgnoreCase(stringArray[position]))
+                    if (o.getName().equalsIgnoreCase(stringArray[position]))
                         idLocation = o.getId();
                 }
             }
         });
 
-        tvId.setText(car.getId()+"");
+//        Set information for Car detail
+        tvId.setText(car.getId() + "");
         editName.setText(car.getName());
         editDescription.setText(car.getDescription());
-        editPrice.setText(car.getPrice()+"");
-        if(car.getImage()!=null){
+        editPrice.setText(car.getPrice() + "");
+        if (car.getImage() != null) {
             Bitmap bitmap = BitmapFactory.decodeByteArray(car.getImage(), 0, car.getImage().length);
             img.setImageBitmap(bitmap);
         }
 
-
+//      Click to delete car
         btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 delete(car.getId());
             }
         });
+
+//        Click to update car
         btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Car carLast = createCar();
-
-                if (carLast!= null){
-                    dbManager.updateCar(carLast,car.getId());
+                if (carLast != null) {
+                    dbManager.updateCar(carLast, car.getId());
                     Toast.makeText(getApplicationContext(), "Update Successfully", Toast.LENGTH_LONG).show();
                     Intent intent = new Intent(AdminCarDetailActivity.this, AdminManagerActivity.class);
                     startActivity(intent);
                 }
             }
         });
+
+//        Set image
         ibtnCamera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -136,11 +154,11 @@ public class AdminCarDetailActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        if(requestCode == REQUEST_CODE_CAMERA && resultCode == RESULT_OK && data != null){
+        if (requestCode == REQUEST_CODE_CAMERA && resultCode == RESULT_OK && data != null) {
             Bitmap bitmap = (Bitmap) data.getExtras().get("data");
             img.setImageBitmap(bitmap);
         }
-        if(requestCode == REQUEST_CODE_FOLDER && resultCode == RESULT_OK && data != null){
+        if (requestCode == REQUEST_CODE_FOLDER && resultCode == RESULT_OK && data != null) {
             Uri uri = data.getData();
             try {
                 InputStream inputStream = getContentResolver().openInputStream(uri);
@@ -153,11 +171,11 @@ public class AdminCarDetailActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
     }
 
-    public void init(){
+    public void init() {
         tvId = findViewById(R.id.detail_car_id);
         editName = findViewById(R.id.detail_car_name);
         editDescription = findViewById(R.id.detail_car_description);
-        editPrice= findViewById(R.id.detail_car_price);
+        editPrice = findViewById(R.id.detail_car_price);
         img = findViewById(R.id.detail_car_img_test);
         ibtnCamera = findViewById(R.id.detail_car_camera);
         ibtnFolder = findViewById(R.id.detail_car_folder);
@@ -168,7 +186,8 @@ public class AdminCarDetailActivity extends AppCompatActivity {
 
 
     }
-    public void delete(int id){
+
+    public void delete(int id) {
         DBManager dbManager = new DBManager(this);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -197,15 +216,15 @@ public class AdminCarDetailActivity extends AppCompatActivity {
         alertDialog.show();
     }
 
-    private Car createCar(){
+    private Car createCar() {
         byte[] image = null;
         BitmapDrawable bitmapDrawable = (BitmapDrawable) img.getDrawable();
         if (bitmapDrawable != null) {
             Bitmap bitmap = bitmapDrawable.getBitmap();
             ByteArrayOutputStream byteArray = new ByteArrayOutputStream();
-            bitmap.compress(Bitmap.CompressFormat.PNG,100,byteArray);
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArray);
             image = byteArray.toByteArray();
-            // sử dụng bitmap
+            // use bitmap
         } else {
             image = null;
         }
@@ -214,7 +233,7 @@ public class AdminCarDetailActivity extends AppCompatActivity {
         String description = editDescription.getText().toString();
         double price = Double.parseDouble(editPrice.getText().toString());
 
-        Car car = new Car(name,description,price,image,1,idLocation);
+        Car car = new Car(name, description, price, image, 1, idLocation);
         return car;
     }
 }

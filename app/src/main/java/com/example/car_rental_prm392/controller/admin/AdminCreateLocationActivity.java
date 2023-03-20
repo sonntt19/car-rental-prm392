@@ -31,20 +31,23 @@ import java.io.InputStream;
 
 public class AdminCreateLocationActivity extends AppCompatActivity {
 
-    private EditText editName,editDescription;
+    private EditText editName, editDescription;
     private Button btnSave;
     private ImageView img;
     private ImageButton ibtnCamera, ibtnFolder;
+
     int REQUEST_CODE_CAMERA = 123;
     int REQUEST_CODE_FOLDER = 456;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_create_location);
         DBManager dbManager = new DBManager(this);
+
         init();
 
-
+//        Set image
         ibtnCamera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -61,13 +64,13 @@ public class AdminCreateLocationActivity extends AppCompatActivity {
             }
         });
 
-
+//      Click to save new location
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Location location = createLocation();
 
-                if (location!= null){
+                if (location != null) {
                     dbManager.addLocation(location);
                     editName.setText("");
                     editDescription.setText("");
@@ -80,11 +83,11 @@ public class AdminCreateLocationActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        if(requestCode == REQUEST_CODE_CAMERA && resultCode == RESULT_OK && data != null){
+        if (requestCode == REQUEST_CODE_CAMERA && resultCode == RESULT_OK && data != null) {
             Bitmap bitmap = (Bitmap) data.getExtras().get("data");
             img.setImageBitmap(bitmap);
         }
-        if(requestCode == REQUEST_CODE_FOLDER && resultCode == RESULT_OK && data != null){
+        if (requestCode == REQUEST_CODE_FOLDER && resultCode == RESULT_OK && data != null) {
             Uri uri = data.getData();
             try {
                 InputStream inputStream = getContentResolver().openInputStream(uri);
@@ -97,24 +100,25 @@ public class AdminCreateLocationActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
     }
 
-    public void init(){
-        editName=findViewById(R.id.add_location_name);
-        editDescription=findViewById(R.id.add_location_description);
-        btnSave=findViewById(R.id.add_location_save);
-        ibtnCamera=findViewById(R.id.add_location_camera);
-        ibtnFolder=findViewById(R.id.add_location_folder);
+    public void init() {
+        editName = findViewById(R.id.add_location_name);
+        editDescription = findViewById(R.id.add_location_description);
+        btnSave = findViewById(R.id.add_location_save);
+        ibtnCamera = findViewById(R.id.add_location_camera);
+        ibtnFolder = findViewById(R.id.add_location_folder);
         img = findViewById((R.id.add_location_img_test));
     }
-    private Location createLocation(){
+
+    private Location createLocation() {
         DBManager dbManager = new DBManager(this);
         byte[] image = null;
         BitmapDrawable bitmapDrawable = (BitmapDrawable) img.getDrawable();
         if (bitmapDrawable != null) {
             Bitmap bitmap = bitmapDrawable.getBitmap();
             ByteArrayOutputStream byteArray = new ByteArrayOutputStream();
-            bitmap.compress(Bitmap.CompressFormat.PNG,100,byteArray);
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArray);
             image = byteArray.toByteArray();
-            // sử dụng bitmap
+            // use bitmap
         } else {
             image = null;
         }
@@ -123,11 +127,11 @@ public class AdminCreateLocationActivity extends AppCompatActivity {
         String description = editDescription.getText().toString();
 
         Location locationCheck = dbManager.checkLocationByName(name);
-        if (locationCheck!=null){
+        if (locationCheck != null) {
             Toast.makeText(getApplicationContext(), "Location name Existed", Toast.LENGTH_LONG).show();
             return null;
         }
-        Location location = new Location(name, description,image);
+        Location location = new Location(name, description, image);
         return location;
     }
 }

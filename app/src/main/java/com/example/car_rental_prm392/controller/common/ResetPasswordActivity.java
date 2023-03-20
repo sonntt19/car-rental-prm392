@@ -31,10 +31,12 @@ public class ResetPasswordActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reset_password);
         DBManager dbManager = new DBManager(this);
+
         init();
 
-        if (user!=null){
-            if(user.getAvatar()!=null){
+//        Get information User
+        if (user != null) {
+            if (user.getAvatar() != null) {
                 byte[] image = user.getAvatar();
                 Bitmap bitmap = BitmapFactory.decodeByteArray(image, 0, image.length);
                 cImg.setImageBitmap(bitmap);
@@ -44,6 +46,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
 
         }
 
+//        Click to reset password
         btnReset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -52,11 +55,11 @@ public class ResetPasswordActivity extends AppCompatActivity {
                 String newPass1 = editNewPass1.getText().toString();
                 String newPass2 = editNewPass2.getText().toString();
 
-                if (!oldPass.equals(userReset.getPassword())){
+                if (!oldPass.equals(userReset.getPassword())) {
                     Toast.makeText(getApplicationContext(), "Old Password not correct", Toast.LENGTH_LONG).show();
-                }else if(!newPass1.equals(newPass2)){
+                } else if (!newPass1.equals(newPass2)) {
                     Toast.makeText(getApplicationContext(), "New Password not match", Toast.LENGTH_LONG).show();
-                }else {
+                } else {
                     dbManager.updatePassword(newPass1, user.getUserId());
                     Toast.makeText(getApplicationContext(), "Reset Successful", Toast.LENGTH_LONG).show();
                     Intent intent = new Intent(ResetPasswordActivity.this, LoginActivity.class);
@@ -66,7 +69,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
         });
     }
 
-    public void init(){
+    public void init() {
         cImg = findViewById(R.id.reset_password_img);
         tvName = findViewById(R.id.reset_password_name);
         tvEmail = findViewById(R.id.reset_password_email);

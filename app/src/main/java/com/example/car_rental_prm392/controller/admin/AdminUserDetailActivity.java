@@ -32,36 +32,40 @@ public class AdminUserDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_user_detail);
         DBManager dbManager = new DBManager(this);
+
+//        Get user detail from intent
         Intent intent = getIntent();
         Bundle bundle = getIntent().getExtras();
-        if (bundle == null){
+        if (bundle == null) {
             return;
         }
         User user = (User) bundle.get("user");
 
         init();
 
-        tvId.setText(user.getUserId()+"");
+//        Set information for user detail
+        tvId.setText(user.getUserId() + "");
         tvEmail.setText(user.getEmail());
         tvName.setText(user.getFullName());
         tvPhone.setText(user.getPhoneNumber());
-        if(user.getAddress()!=null){
+        if (user.getAddress() != null) {
             tvAddress.setText(user.getAddress());
         }
-        if (user.getRoleId()==0){
+        if (user.getRoleId() == 0) {
             tvRole.setText("Customer");
-        }else {
+        } else {
             tvRole.setText("Admin");
         }
-        if (user.getAvatar()!=null){
+        if (user.getAvatar() != null) {
             Bitmap bitmap = BitmapFactory.decodeByteArray(user.getAvatar(), 0, user.getAvatar().length);
             cImg.setImageBitmap(bitmap);
         }
 
+//        Click to change role
         btnChange.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dbManager.changeRoleById(user.getRoleId(),user.getUserId());
+                dbManager.changeRoleById(user.getRoleId(), user.getUserId());
                 Toast.makeText(getApplicationContext(), "Change Successfully", Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(AdminUserDetailActivity.this, AdminManagerActivity.class);
                 startActivity(intent);
@@ -70,10 +74,10 @@ public class AdminUserDetailActivity extends AppCompatActivity {
 
     }
 
-    public void init(){
+    public void init() {
         tvId = findViewById(R.id.admin_user_detail_id);
-        tvEmail= findViewById(R.id.admin_user_detail_email);
-        tvName= findViewById(R.id.admin_user_detail_name);
+        tvEmail = findViewById(R.id.admin_user_detail_email);
+        tvName = findViewById(R.id.admin_user_detail_name);
         tvPhone = findViewById(R.id.admin_user_detail_phone);
         tvAddress = findViewById(R.id.admin_user_detail_address);
         tvRole = findViewById(R.id.admin_user_detail_role);

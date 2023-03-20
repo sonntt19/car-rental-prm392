@@ -36,6 +36,7 @@ public class LoginActivity extends AppCompatActivity {
 
         init();
 
+//        Click to login
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -67,6 +68,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+//        Click to Sign up
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

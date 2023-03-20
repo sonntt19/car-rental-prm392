@@ -33,15 +33,20 @@ public class UserManagerFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view =  inflater.inflate(R.layout.fragment_user_manager,container,false);
+        View view = inflater.inflate(R.layout.fragment_user_manager, container, false);
         return view;
     }
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         DBManager dbManager = new DBManager(getActivity());
-        listViewUser  = view.findViewById(R.id.admin_user_list);
+
+//        Declare view
+        listViewUser = view.findViewById(R.id.admin_user_list);
         searchView = view.findViewById(R.id.admin_user_search);
+
+//        Search view for User name
         searchView.clearFocus();
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -56,25 +61,24 @@ public class UserManagerFragment extends Fragment {
             }
         });
 
+//        Get list User and set Adapter
         listUsers = dbManager.getAllUser();
         userAdapter = new AdminUserAdapter(getActivity(), listUsers);
-
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         listViewUser.setLayoutManager(linearLayoutManager);
         listViewUser.setAdapter(userAdapter);
-
 
     }
 
     private void filterList(String newText) {
         List<User> filterList = new ArrayList<>();
-        for (User o:
+        for (User o :
                 listUsers) {
-            if (o.getFullName().toLowerCase().contains(newText.toLowerCase())){
+            if (o.getFullName().toLowerCase().contains(newText.toLowerCase())) {
                 filterList.add(o);
             }
-            if (filterList.isEmpty()){
-            }else {
+            if (filterList.isEmpty()) {
+            } else {
                 userAdapter.setFilteredList(filterList);
             }
         }

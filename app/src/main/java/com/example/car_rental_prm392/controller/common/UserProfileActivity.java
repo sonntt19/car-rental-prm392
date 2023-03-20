@@ -39,22 +39,26 @@ public class UserProfileActivity extends AppCompatActivity {
     private TextView tvName, tvEmail;
     private EditText editName, editPhone, editAddress;
     private Button btnSave, btnReset;
+
     int REQUEST_CODE_CAMERA = 123;
     int REQUEST_CODE_FOLDER = 456;
+
     User user = DataLocalManager.getUser();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_profile);
         DBManager dbManager = new DBManager(this);
+
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_nav);
         bottomNavigationView.setSelectedItemId(R.id.nav_bot_profile);
 
         //        Account Information
 
         init();
-        if (user!=null){
-            if(user.getAvatar()!=null){
+        if (user != null) {
+            if (user.getAvatar() != null) {
                 byte[] image = user.getAvatar();
                 Bitmap bitmap = BitmapFactory.decodeByteArray(image, 0, image.length);
                 cImg.setImageBitmap(bitmap);
@@ -63,7 +67,7 @@ public class UserProfileActivity extends AppCompatActivity {
             tvEmail.setText(user.getEmail());
             editName.setText(user.getFullName());
             editPhone.setText(user.getPhoneNumber());
-            if (user.getAddress()!=null){
+            if (user.getAddress() != null) {
                 editAddress.setText(user.getAddress());
             }
         }
@@ -75,8 +79,8 @@ public class UserProfileActivity extends AppCompatActivity {
             public void onClick(View v) {
                 User userlast = createUser();
 
-                if (userlast!= null){
-                    dbManager.updateUser(userlast,user.getUserId());
+                if (userlast != null) {
+                    dbManager.updateUser(userlast, user.getUserId());
                     Toast.makeText(getApplicationContext(), "Update Successfully", Toast.LENGTH_LONG).show();
                     user = dbManager.checkUserByEmail(user.getEmail());
                     DataLocalManager.removeUser();
@@ -86,6 +90,7 @@ public class UserProfileActivity extends AppCompatActivity {
             }
         });
 
+//        Click to choose Image
         cImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -93,6 +98,7 @@ public class UserProfileActivity extends AppCompatActivity {
             }
         });
 
+//        Click to reset password Screen
         btnReset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -102,7 +108,7 @@ public class UserProfileActivity extends AppCompatActivity {
         });
 
         bottomNavigationView.setOnItemSelectedListener(item -> {
-            switch (item.getItemId()){
+            switch (item.getItemId()) {
                 case R.id.nav_bot_profile:
                     return true;
                 case R.id.nav_bot_home:
@@ -120,11 +126,11 @@ public class UserProfileActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        if(requestCode == REQUEST_CODE_CAMERA && resultCode == RESULT_OK && data != null){
+        if (requestCode == REQUEST_CODE_CAMERA && resultCode == RESULT_OK && data != null) {
             Bitmap bitmap = (Bitmap) data.getExtras().get("data");
             cImg.setImageBitmap(bitmap);
         }
-        if(requestCode == REQUEST_CODE_FOLDER && resultCode == RESULT_OK && data != null){
+        if (requestCode == REQUEST_CODE_FOLDER && resultCode == RESULT_OK && data != null) {
             Uri uri = data.getData();
             try {
                 InputStream inputStream = getContentResolver().openInputStream(uri);
@@ -136,6 +142,7 @@ public class UserProfileActivity extends AppCompatActivity {
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
+
     private void chooseImage() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Avatar");
@@ -163,7 +170,7 @@ public class UserProfileActivity extends AppCompatActivity {
         alertDialog.show();
     }
 
-    public void init(){
+    public void init() {
         cImg = findViewById(R.id.user_profile_img);
         tvName = findViewById(R.id.user_profile_name);
         tvEmail = findViewById(R.id.user_profile_email);
@@ -174,11 +181,11 @@ public class UserProfileActivity extends AppCompatActivity {
         btnReset = findViewById(R.id.edit_user_profile_reset);
     }
 
-    public User createUser(){
+    public User createUser() {
         BitmapDrawable bitmapDrawable = (BitmapDrawable) cImg.getDrawable();
         Bitmap bitmap = bitmapDrawable.getBitmap();
         ByteArrayOutputStream byteArray = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG,100,byteArray);
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArray);
         byte[] image = byteArray.toByteArray();
 
         String fullName = editName.getText().toString();

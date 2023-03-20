@@ -54,8 +54,8 @@ public class HomeActivity extends AppCompatActivity {
         tvName = findViewById(R.id.home_account_name);
         btnLogout = findViewById(R.id.home_account_logout);
         User user = DataLocalManager.getUser();
-        if (user!=null){
-            tvName.setText("Hello "+user.getFullName());
+        if (user != null) {
+            tvName.setText("Hello " + user.getFullName());
         }
 
         btnLogout.setOnClickListener(new View.OnClickListener() {
@@ -66,18 +66,18 @@ public class HomeActivity extends AppCompatActivity {
         });
 
 //        List Location
-        listViewLocation  = findViewById(R.id.home_rv_location);
+        listViewLocation = findViewById(R.id.home_rv_location);
         listLocations = dbManager.getAllLocation();
 
         homeLocationAdapter = new HomeLocationAdapter(this, listLocations);
 
-        LinearLayoutManager linearLayoutManagerLocation = new LinearLayoutManager(this, RecyclerView.HORIZONTAL,false);
+        LinearLayoutManager linearLayoutManagerLocation = new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false);
         listViewLocation.setLayoutManager(linearLayoutManagerLocation);
         listViewLocation.setAdapter(homeLocationAdapter);
 
 //        List Car
 
-        listViewCar  = findViewById(R.id.home_rv_car);
+        listViewCar = findViewById(R.id.home_rv_car);
         listcars = dbManager.getAllCarAvailable();
         carAdapter = new HomeCarAdapter(this, listcars);
 
@@ -87,7 +87,7 @@ public class HomeActivity extends AppCompatActivity {
 
 //        Set Event
         bottomNavigationView.setOnItemSelectedListener(item -> {
-            switch (item.getItemId()){
+            switch (item.getItemId()) {
                 case R.id.nav_bot_home:
                     return true;
                 case R.id.nav_bot_history:

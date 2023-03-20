@@ -33,53 +33,61 @@ public class AdminLocationDetailActivity extends AppCompatActivity {
     private EditText editName, editDescription;
     private ImageView img;
     private ImageButton ibtnCamera, ibtnFolder;
+
     int REQUEST_CODE_CAMERA = 123;
     int REQUEST_CODE_FOLDER = 456;
+
     private Button btnDelete, btnUpdate;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_location_detail);
         DBManager dbManager = new DBManager(this);
+
+//        Get location detail from intent
         Intent intent = getIntent();
         Bundle bundle = getIntent().getExtras();
-        if (bundle == null){
+        if (bundle == null) {
             return;
         }
         Location location = (Location) bundle.get("location");
 
         init();
 
-
-        tvId.setText(location.getId()+"");
+//        Set information for location detail
+        tvId.setText(location.getId() + "");
         editName.setText(location.getName());
         editDescription.setText(location.getDescription());
-        if(location.getImage()!=null){
+        if (location.getImage() != null) {
             Bitmap bitmap = BitmapFactory.decodeByteArray(location.getImage(), 0, location.getImage().length);
             img.setImageBitmap(bitmap);
         }
 
-
-
+//      Click to delete location
         btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 delete(location.getId());
             }
         });
+
+//      Click to update location
         btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Location locationLast = createLocation();
 
-                if (locationLast!= null){
-                    dbManager.updateLocation(locationLast,location.getId());
+                if (locationLast != null) {
+                    dbManager.updateLocation(locationLast, location.getId());
                     Toast.makeText(getApplicationContext(), "Update Successfully", Toast.LENGTH_LONG).show();
                     Intent intent = new Intent(AdminLocationDetailActivity.this, AdminManagerActivity.class);
                     startActivity(intent);
                 }
             }
         });
+
+//        Set image
         ibtnCamera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -101,11 +109,11 @@ public class AdminLocationDetailActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        if(requestCode == REQUEST_CODE_CAMERA && resultCode == RESULT_OK && data != null){
+        if (requestCode == REQUEST_CODE_CAMERA && resultCode == RESULT_OK && data != null) {
             Bitmap bitmap = (Bitmap) data.getExtras().get("data");
             img.setImageBitmap(bitmap);
         }
-        if(requestCode == REQUEST_CODE_FOLDER && resultCode == RESULT_OK && data != null){
+        if (requestCode == REQUEST_CODE_FOLDER && resultCode == RESULT_OK && data != null) {
             Uri uri = data.getData();
             try {
                 InputStream inputStream = getContentResolver().openInputStream(uri);
@@ -118,7 +126,7 @@ public class AdminLocationDetailActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
     }
 
-    public void init(){
+    public void init() {
         tvId = findViewById(R.id.detail_location_id);
         editName = findViewById(R.id.detail_location_name);
         editDescription = findViewById(R.id.detail_location_description);
@@ -129,7 +137,8 @@ public class AdminLocationDetailActivity extends AppCompatActivity {
         btnUpdate = findViewById(R.id.detail_location_update);
 
     }
-    public void delete(int id){
+
+    public void delete(int id) {
         DBManager dbManager = new DBManager(this);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -158,15 +167,15 @@ public class AdminLocationDetailActivity extends AppCompatActivity {
         alertDialog.show();
     }
 
-    private Location createLocation(){
+    private Location createLocation() {
         byte[] image = null;
         BitmapDrawable bitmapDrawable = (BitmapDrawable) img.getDrawable();
         if (bitmapDrawable != null) {
             Bitmap bitmap = bitmapDrawable.getBitmap();
             ByteArrayOutputStream byteArray = new ByteArrayOutputStream();
-            bitmap.compress(Bitmap.CompressFormat.PNG,100,byteArray);
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArray);
             image = byteArray.toByteArray();
-            // sử dụng bitmap
+            // use bitmap
         } else {
             image = null;
         }
@@ -174,7 +183,7 @@ public class AdminLocationDetailActivity extends AppCompatActivity {
         String name = editName.getText().toString();
         String description = editDescription.getText().toString();
 
-        Location location = new Location(name, description,image);
+        Location location = new Location(name, description, image);
         return location;
     }
 }

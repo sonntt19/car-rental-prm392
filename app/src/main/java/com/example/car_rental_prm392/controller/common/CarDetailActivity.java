@@ -27,48 +27,57 @@ public class CarDetailActivity extends AppCompatActivity {
     private TextView tvName, tvPrice, tvLocation, tvDescription;
     private ImageView img;
     private Button btnRent;
+
     ArrayList<Location> listLocations;
     User user = DataLocalManager.getUser();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_car_detail);
-
         DBManager dbManager = new DBManager(this);
+
+//        Get Car detail from intent
         Intent intent = getIntent();
         Bundle bundle = getIntent().getExtras();
-        if (bundle == null){
+        if (bundle == null) {
             return;
         }
         Car car = (Car) bundle.get("car");
+
+//        Get list location for location name
         listLocations = dbManager.getAllLocation();
-        String location="";
-        for (Location o:
+        String location = "";
+        for (Location o :
                 listLocations) {
-            if(o.getId()== car.getLocationId())
+            if (o.getId() == car.getLocationId())
                 location = o.getName();
         }
 
         init();
 
+//        Set information fo Car detail
         tvName.setText(car.getName());
-        tvPrice.setText(car.getPrice()+"");
+        tvPrice.setText(car.getPrice() + "");
         tvLocation.setText(location);
         tvDescription.setText(car.getDescription());
-        if(car.getImage()!=null){
+        if (car.getImage() != null) {
             Bitmap bitmap = BitmapFactory.decodeByteArray(car.getImage(), 0, car.getImage().length);
             img.setImageBitmap(bitmap);
         }
 
-        Rental rental = dbManager.checkRentalForUser(car.getId(),user.getUserId());
-        if(rental!=null){
+//        Set visibility of button is none
+        Rental rental = dbManager.checkRentalForUser(car.getId(), user.getUserId());
+        if (rental != null) {
             btnRent.setVisibility(View.GONE);
 
         }
+
+//        Click to rent car
         btnRent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Rental rental = new Rental(user.getUserId(), car.getId(),0, 1);
+                Rental rental = new Rental(user.getUserId(), car.getId(), 0, 1);
                 dbManager.addRental(rental);
                 Toast.makeText(getApplicationContext(), "Rental Successfully", Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(CarDetailActivity.this, HistoryActivity.class);
@@ -77,7 +86,7 @@ public class CarDetailActivity extends AppCompatActivity {
         });
     }
 
-    public void init(){
+    public void init() {
         img = findViewById(R.id.detail_car_img);
         tvName = findViewById(R.id.detail_car_name);
         tvPrice = findViewById(R.id.detail_car_price);
