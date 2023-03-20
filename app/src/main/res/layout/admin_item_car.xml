@@ -19,7 +19,6 @@
             android:layout_height="100dp"
             android:layout_marginLeft="10dp"
             android:gravity="center"
-            android:src="@drawable/car"
             />
         <LinearLayout
             android:layout_marginLeft="20dp"
