@@ -90,6 +90,7 @@ public class CarManagerFragment extends Fragment {
                 filterList.add(o);
             }
             if (filterList.isEmpty()) {
+                carAdapter.setFilteredList(filterList);
                 Toast.makeText(getActivity(), "No Car", Toast.LENGTH_LONG).show();
             } else {
                 carAdapter.setFilteredList(filterList);

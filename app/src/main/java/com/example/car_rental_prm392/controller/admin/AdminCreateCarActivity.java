@@ -105,11 +105,9 @@ public class AdminCreateCarActivity extends AppCompatActivity {
 
                 if (car != null) {
                     dbManager.addCar(car);
-                    editName.setText("");
-                    editDescription.setText("");
-                    editPrice.setText("");
-                    img.setImageBitmap(null);
                     Toast.makeText(getApplicationContext(), "Successfully", Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(AdminCreateCarActivity.this, AdminManagerActivity.class);
+                    startActivity(intent);
                 }
             }
         });

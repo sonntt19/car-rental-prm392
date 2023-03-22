@@ -73,10 +73,9 @@ public class AdminCreateLocationActivity extends AppCompatActivity {
 
                 if (location != null) {
                     dbManager.addLocation(location);
-                    editName.setText("");
-                    editDescription.setText("");
-                    img.setImageBitmap(null);
                     Toast.makeText(getApplicationContext(), "Successfully", Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(AdminCreateLocationActivity.this, AdminManagerActivity.class);
+                    startActivity(intent);
                 }
             }
         });

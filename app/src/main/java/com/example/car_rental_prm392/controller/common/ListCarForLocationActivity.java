@@ -61,6 +61,8 @@ public class ListCarForLocationActivity extends AppCompatActivity {
                 filterList.add(o);
             }
             if (filterList.isEmpty()) {
+                carAdapter.setFilteredList(filterList);
+                Toast.makeText(this, "No Car", Toast.LENGTH_LONG).show();
             } else {
                 carAdapter.setFilteredList(filterList);
             }
