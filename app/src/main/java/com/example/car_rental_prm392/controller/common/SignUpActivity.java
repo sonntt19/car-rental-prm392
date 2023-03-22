@@ -119,8 +119,8 @@ public class SignUpActivity extends AppCompatActivity {
             editPassword1.setError("Password cannot be empty");
             return false;
         }
-        else if(val.length() <= 10){
-            editPassword1.setError("Password too long");
+        else if(val.length() <= 8){
+            editPassword1.setError("Password too short");
             return false;
         }
         else {

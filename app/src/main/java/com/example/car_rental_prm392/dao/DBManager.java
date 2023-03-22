@@ -19,7 +19,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class DBManager extends SQLiteOpenHelper {
-    private static final String DATABASE_NAME = "car_rental_manager_v2";
+    private static final String DATABASE_NAME = "car_rental_manager";
     private static final String USER_TABLE_NAME = "users";
     private static final String USER_ID = "id";
     private static final String USER_EMAIL = "email";
